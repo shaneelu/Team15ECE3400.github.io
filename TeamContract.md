@@ -1,4 +1,4 @@
-#ECE 3400, Semester #Fall 17 Team #15
+# ECE 3400, Semester #Fall 17 Team #15
 Team Members: Shanee Lu, Ben Francis, Erika Yu, Aasta Gandhi, David Yang, Daniel Edens
 Team Procedures
 Team Meetings:
