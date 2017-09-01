@@ -1,12 +1,16 @@
 # ECE 3400, Semester #Fall 17 Team #15
 Team Members: Shanee Lu, Ben Francis, Erika Yu, Aasta Gandhi, David Yang, Daniel Edens
+
 Team Procedures
+
 Team Meetings:
 It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings.
-Weekly Meeting time in addition to lab: Saturday 10AM eHub in Collegetown 
+
+Weekly Meeting time in addition to lab: Sunday 5PM eHub in Collegetown 
+
 Agenda:
-Team leader will set agenda at least 2-3 days before becoming team leader, notifying members through Slack. Members must come to consensus with agenda
-Members are individually responsible for keeping track of their tasks; if not, other members can notify that member or be redirected to consequence section of contract
+Team leader will set agenda at least 2-3 days before becoming team leader, notifying members through Slack. Members must come to consensus with agenda.
+Members are individually responsible for keeping track of their tasks; if not, other members can notify that member or be redirected to consequence section of contract.
 Team leader is responsible for keeping team on track during a meeting!
 Decision-making: Majority Agree on how your team will make decisions. By consensus, majority vote, leader has veto rights, etc.?
 Majority Vote, no leader veto rights, 
