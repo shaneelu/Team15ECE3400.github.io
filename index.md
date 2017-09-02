@@ -195,25 +195,25 @@ Shanee Lu		Date 9/1/17
 
 ## About Us
 
-### Daniel Edens
+### Aasta Gandhi
 
-![](./Daniel.jpg)
+![](./Aasta.jpg)
 
 ### Benjamin Francis
 
 ![](./Benjamin.jpg)
 
-### Erika Yu
+### Daniel Edens
 
-![](./Erika.jpg)
-
-### Aasta Gandhi
-
-![](./Aasta.jpg)
+![](./Daniel.jpg)
 
 ### David Yang
 
 ![](./David.jpg)
+
+### Erika Yu
+
+![](./Erika.jpg)
 
 ### Shanee Lu
 
