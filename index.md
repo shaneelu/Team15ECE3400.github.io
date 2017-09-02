@@ -196,4 +196,4 @@ Shanee Lu		Date 9/1/17
 About Us
 
 Daniel Edens (de229)
-![](./Team15ECE3400/DanielEdens.jpg)
+![ ](./Team15ECE3400.github.io/DanielEdens.jpg)
