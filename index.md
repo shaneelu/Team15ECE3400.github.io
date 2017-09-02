@@ -67,16 +67,16 @@ Deadlines are posted publicly w/ minutes
 
 Any items required for website must abide by agreement above under section “Website updates”
 
-Strategies to fulfill these standards:
+## Strategies to fulfill these standards:
 
-Team Participation:
+### Team Participation:
 Strategies to ensure cooperation and equal distribution of tasks: 
 
 In a meeting, when setting action items and deadlines, members must come to consensus on individual task load
 
 Strategies for encouraging/including ideas from all team members (team maintenance):
 
-Always gain consensus from members during meetings
+ Always gain consensus from members during meetings
 
 Let everyone participate at meetings, no shooting idea
 
@@ -90,7 +90,7 @@ Strategies to get help if you’re stuck:
 
 If we are stuck, we’ll first consult with each other to see if we can solve the problem. If we can’t, we can go to office hours to ask for help from the TA’s.
 
-Personal Accountability:
+### Personal Accountability:
 
 Expected individual attendance, punctuality, and participation at all team meetings:
 
@@ -134,7 +134,7 @@ How should a team member catch up if they have to miss a meeting
 
 Specified in part 1c.
 
-Consequences for Failing to Follow Procedures and Fulfill Expectations
+### Consequences for Failing to Follow Procedures and Fulfill Expectations
 
 Describe how, as a group, you would handle individuals who do not live up to this contract:
 
@@ -153,7 +153,7 @@ Upon second infraction: Leader and group will discuss with defendant at meeting.
 
 Upon third (and final) infraction: Leader will address TAs and professor.
 
-Team Leadership
+## Team Leadership
 
 Every person on the team will have to take the role as a leader for at least two weeks. The role of the leader will be to organize meetings and make sure that everything is submitted in a timely manner. Here are some hints on what the leader should do. Please note here who will be responsible when:
 
