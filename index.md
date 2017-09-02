@@ -201,7 +201,7 @@ Shanee Lu		Date 9/1/17
 
 ### Benjamin Francis
 
-![](./Benjamin.jpg)
+![](./Ben.jpg)
 
 ### Daniel Edens
 
