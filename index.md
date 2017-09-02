@@ -197,4 +197,4 @@ Shanee Lu		Date 9/1/17
 
 ### Daniel Edens (de229)
 
-![](./DanielEdens.jpg)
+![](./Daniel.jpg)
