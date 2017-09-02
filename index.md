@@ -4,51 +4,49 @@ Team Members: Shanee Lu, Ben Francis, Erika Yu, Aasta Gandhi, David Yang, Daniel
 
 ## Team Procedures
 
-Team Meetings:
+### Team Meetings:
 
 It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings.
 
 Weekly Meeting time in addition to lab: Sunday 5PM eHub in Collegetown 
 
-Agenda:
+### Agenda:
 
 Team leader will set agenda at least 2-3 days before becoming team leader, notifying members through Slack. Members must come to consensus with agenda.
-
+ 
 Members are individually responsible for keeping track of their tasks; if not, other members can notify that member or be redirected to consequence section of contract.
 
 Team leader is responsible for keeping team on track during a meeting!
 
-Decision-making: Majority Agree on how your team will make decisions. By consensus, majority vote, leader has veto rights, etc.?
+### Decision-making: Majority Agree on how your team will make decisions. By consensus, majority vote, leader has veto rights, etc.?
 
 Majority Vote, no leader veto rights, 
-
+ 
 In event of tie: people with speciality in relevant fields will have votes with twice the weight
-
-Meeting Minutes: Written records will be kept on google docs and stored in the “Meeting Minutes” folder in the team drive. 
+ 
+### Meeting Minutes: Written records will be kept on google docs and stored in the “Meeting Minutes” folder in the team drive. 
 For group meetings, the team leader will take minutes
-
+ 
 Exception: who ever is latest after meeting start time, has to take meetings
 
 For smaller meetings, anyone can take minutes (decided at beginning of meeting)
 
 Will have action item lists with list of deadlines for each item
 
-Method of communication: 
-
+### Method of communication: 
+ 
 We will use Slack to communicate any team information, conflicts/problems, scheduling etc. 
 
 Have a google drive to store all team information and work. 
-
 Text/email/facebook are alternate modes of communication in case we need to reach someone urgently -- we have a team info sheet. 
 
 ## Team Expectations
 
-Work Quality
+### Work Quality
 
 Agree on a (realistic) level of quality for website updates, individual work/design, peer reviews, etc.
 
 Website updates: 
-
 Should occur by Tuesday (after lab on prev Friday), 11:59 pm 
 
 Split into pairs to update the website. All members should write up their parts and send to update-ers by Monday (after Friday lab), 12 pm 
@@ -59,7 +57,7 @@ Individual work/design:
 
 First consult another specialist in group. If no other specialist is available, then consult the group as a whole, or consult a TA.
 
-Agree on when individuals/sub-teams must finish their part (on the deadline, or hours or a day before the deadline such that other team members can check their work):
+###  Agree on when individuals/sub-teams must finish their part (on the deadline, or hours or a day before the deadline such that other team members can check their work):
 
 Deadlines for action items will be listed on meeting minutes, deadlines should be decided during meeting or within 24 hrs of meetings
 
@@ -72,11 +70,11 @@ Any items required for website must abide by agreement above under section “We
 ### Team Participation:
 Strategies to ensure cooperation and equal distribution of tasks: 
 
-In a meeting, when setting action items and deadlines, members must come to consensus on individual task load
+In a meeting, when setting action items and deadlines, members must come to consensus on individual task loa
 
 Strategies for encouraging/including ideas from all team members (team maintenance):
 
- Always gain consensus from members during meetings
+Always gain consensus from members during meetings
 
 Let everyone participate at meetings, no shooting idea
 
