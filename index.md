@@ -1,4 +1,5 @@
 # ECE 3400, Semester #Fall 17 Team #15
+## Lab Section 402: Friday 1:25-4:25
 
 Team Members: Shanee Lu, Ben Francis, Erika Yu, Aasta Gandhi, David Yang, Daniel Edens
 
