@@ -197,7 +197,7 @@ Shanee Lu		Date 9/1/17
 
 ### Aasta Gandhi
 
-![](./Aasta.jpg)
+![](./Aasta.JPG)
 
 ### Benjamin Francis
 
