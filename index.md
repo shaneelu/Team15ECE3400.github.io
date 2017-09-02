@@ -193,8 +193,8 @@ David Yang		Date 9/1/17
 Shanee Lu		Date 9/1/17
 
 
-About Us
+## About Us
 
-Daniel Edens (de229)
+### Daniel Edens (de229)
 
 ![](./DanielEdens.jpg)
