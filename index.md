@@ -197,24 +197,24 @@ Shanee Lu		Date 9/1/17
 
 ### Aasta Gandhi
 
-![](./Aasta.jpg)
+![](./TeamPhotos/Aasta.jpg)
 
 ### Benjamin Francis
 
-![](./Ben.jpg)
+![](./TeamPhotos/Ben.jpg)
 
 ### Daniel Edens
 
-![](./Daniel.jpg)
+![](./TeamPhotos/Daniel.jpg)
 
 ### David Yang
 
-![](./David.jpg)
+![](./TeamPhotos/David.jpg)
 
 ### Erika Yu
 
-![](./Erika.jpg)
+![](./TeamPhotos/Erika.jpg)
 
 ### Shanee Lu
 
-![](./Shanee.jpg)
+![](./TeamPhotos/Shanee.jpg)
