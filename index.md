@@ -2,7 +2,11 @@
 ## Lab Section 402: Friday 1:25-4:25
 
 [Lab 1](./Lab1.md)
+
 [Lab 2](./Lab2.md)
+
 [Lab 3](./Lab3.md)
+
 [About Us](./AboutUs.md)
+
 [Team Contract](./TeamContract.md)
