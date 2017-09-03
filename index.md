@@ -1,6 +1,8 @@
-# ECE 3400, Semester #Fall 17 Team #15
+# Team #15, ECE 3400, Fall 17
 ## Lab Section 402: Friday 1:25-4:25
 
-[Team Contract](./TeamContract.md)
-
+[Lab 1](./Lab1.md)
+[Lab 2](./Lab2.md)
+[Lab 3](./Lab3.md)
 [About Us](./AboutUs.md)
+[Team Contract](./TeamContract.md)
