@@ -3,6 +3,8 @@
 
 ## [Lab 1](./Lab1.md)
 
+## [Meeting Minutes](./MeetingMinutes.md)
+
 ## [About Us](./AboutUs.md)
 
 ## [Team Contract](./TeamContract.md)
