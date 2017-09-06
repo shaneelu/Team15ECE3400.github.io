@@ -1,2 +1,10 @@
 # Lab 1
 ![](./Lab1Photos/20170901_135738.jpg)
+![](./Lab1Photos/20170901_143916.jpg)
+![](./Lab1Photos/20170901_151011.jpg)
+![](./Lab1Photos/20170901_151014.jpg)
+![](./Lab1Photos/20170901_151011.jpg)
+![](./Lab1Photos/20170901_151334.jpg)
+![](./Lab1Photos/20170901_152811.jpg)
+![](./Lab1Photos/20170901_153038.jpg)
+![](./Lab1Photos/20170901_162105.jpg)
