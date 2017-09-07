@@ -187,7 +187,23 @@ This code is commented to describe how it works. You will see the robot move for
 	  delay(450);		// Move forward for 450ms
 	}
 
+![](./Lab1Photos/0a.jpg)
+0a
 
+![](./Lab1Photos/0b.jpg)
+0b
+
+![](./Lab1Photos/90a.jpg)
+90a
+
+![](./Lab1Photos/90b.jpg)
+90b
+
+![](./Lab1Photos/180a.jpg)
+180a
+
+![](./Lab1Photos/180b.jpg)
+180b
 
 ![](./Lab1Photos/20170901_135738.jpg)
 Blinking LED on Arduino
