@@ -43,9 +43,7 @@ Figure 2: Modified Blink Sketch. We chose 9 as our ledPin.
 
 Connect the positive end of the LED to the pin specified in ledPin, and connect the negative end of the LED to ground. When wiring your circuit, remember to insert a 330 Ohm resistor in order to protect your Arduino from a short circuit! Compile and run the program. If everything went right, it should look something like this:
 
-VIDEOOO
-
-
+[Blinking LED Video](https://drive.google.com/file/d/0B5FA_MhAcyNYMlNTUUlYcjlwR0k/view)
 
 
 ![](./Lab1Photos/20170901_135738.jpg)
