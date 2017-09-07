@@ -47,12 +47,18 @@ Connect the positive end of the LED to the pin specified in ledPin, and connect 
 
 
 ### Part 2: The Serial Monitor and the Analog Pins
-In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is [here]http://www.bourns.com/data/global/pdfs/3306.pdf.
+In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is [here](http://www.bourns.com/data/global/pdfs/3306.pdf).
 	
 When writing the Arduino code for Part 2, remember to use analog pins. The naming convention for analog pins is A#, with # representing any integer between 0 and 5 (fig. 3).
 
-Similar to part 1, in the setup() portion of the code, declare variable pin to be an input. Additionally, add a serial monitor by including Serial.begin(9600). In the loop() portion of the code, print the voltage output from the potentiometer to the serial monitor by adding Serial.println(analogRead(pin)). Finally, it is prudent to add a 500 ms delay between print outputs using delay(500) between each println, lest the screen be flooded with numbers.
-
+Similar to part 1, in the setup() portion of the code, declare variable pin to be an input. Additionally, add a serial monitor by including Serial.begin(9600). In the loop() portion of the code, print the voltage output from the potentiometer to the serial monitor by adding Serial.println(analogRead(pin)). Finally, add a 500 ms delay between print outputs using delay(500) between each println, so the screen will not be flooded with numbers. Set up should look like: 
+```
+int pin = A0;
+void setup() {
+  pinMode(pin, INPUT);
+  Serial.begin(9600);
+}
+```
 
 Figure 3: Analog with Potentiometer code. We chose A0 as our pin.
 
