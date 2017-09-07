@@ -43,6 +43,9 @@ Figure 2: Modified Blink Sketch. We chose 9 as our ledPin.
 
 Connect the positive end of the LED to the pin specified in ledPin, and connect the negative end of the LED to ground. When wiring your circuit, remember to insert a 330 Ohm resistor in order to protect your Arduino from a short circuit! Compile and run the program. If everything went right, it should look something like this:
 
+![](./Lab1Photos/20170901_135738.jpg)
+Blinking LED on Arduino
+
 [Blinking LED Video](https://drive.google.com/file/d/0B5FA_MhAcyNYMlNTUUlYcjlwR0k/view)
 
 
@@ -64,17 +67,43 @@ Figure 3: Analog with Potentiometer code. We chose A0 as our pin.
 
 When wiring the circuit, connect the middle pin of the potentiometer to your analog pin specified in pin. Remember to add a 330 Ohm resistor between the Arduino’s analog pin and the potentiometer middle pin! Make a voltage divider by adding an approximately 10 kOhm resistor between the 3.3V port and the potentiometer bottom pin. The potentiometer top pin will connect to GND. When running the program, twist the potentiometer clockwise and counterclockwise and observe the changing readouts. It should look something like this:
 
+![](./Lab1Photos/20170901_143916.jpg)
+Voltage Divider using Potentiometer and 1K Resistor
+
 [VIDEOOO](https://drive.google.com/file/d/0B5FA_MhAcyNYY2t1RjZvcjRuUW8/view)
 
 
+
+
+![](./Lab1Photos/20170901_151334.jpg)
+LED Brightness Oscilloscope Waveform 
+
+![](./Lab1Photos/20170901_152811.jpg)
+Reading analog voltage created by voltage divider
+
 ## Part 3: Analog Output
 In this part of the lab we were able to overcome the Arduino’s inability to create analog outputs by using a pulse-width modulator (PWM). In order to do this, the output must be connected to a digital output pin on the board that supports PWM. Essentially the same code can be used as the previous part with the potentiometer except the function analogWrite is included to convert the signal to analog form. Then the potentiometer must be mapped to the value for the LED’s brightness. The potentiometer is then able to be used as an analog input to change the brightness of the external LED.
+
+![](./Lab1Photos/20170901_151014.jpg)
+Controlling LED Brightness using Voltage Divider
 
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
 
 ## Part 4: Parallax Servos
-This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 41.5Hz, minimum duty cycle is ___ and maximum duty cycle is ___.
+This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 49.5Hz, minimum duty cycle is 550us and maximum duty cycle is 2500us.
+
+![](./Lab1Photos/180a.jpg)
+Frequency is 49.5Hz
+
+![](./Lab1Photos/0a.jpg)
+Duty Cycle when 0 written to Servo
+
+![](./Lab1Photos/90a.jpg)
+Duty Cycle when 90 written to Servo
+
+![](./Lab1Photos/180b.jpg)
+Duty Cycle when 180 written to Servo
 
 Insert the code in figure x below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
@@ -109,6 +138,9 @@ Figure x
 
 ## Mechanical Assembly
 To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
+
+![](./Lab1Photos/20170901_162105.jpg)
+Wheels assembled
 
 ## Electrical Assembly
 There are two Servos and one 5V pin on the Arduino. Each Servo consumes up to 50mA and 5V source on Arduino supplies more than 100mA. To power both motors, cut three-3” pieces of solid core wire, hold two together and solder their ends to one wire end as shown in the image, connect one wire to 5V and the other two to the red wire in the Servo connector.
@@ -186,42 +218,3 @@ This code is commented to describe how it works. You will see the robot move for
 	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
 	  delay(450);		// Move forward for 450ms
 	}
-
-![](./Lab1Photos/0a.jpg)
-0a
-
-![](./Lab1Photos/0b.jpg)
-0b
-
-![](./Lab1Photos/90a.jpg)
-90a
-
-![](./Lab1Photos/90b.jpg)
-90b
-
-![](./Lab1Photos/180a.jpg)
-180a
-
-![](./Lab1Photos/180b.jpg)
-180b
-
-![](./Lab1Photos/20170901_135738.jpg)
-Blinking LED on Arduino
-
-![](./Lab1Photos/20170901_143916.jpg)
-Voltage Divider using Potentiometer and 1K Resistor
-
-![](./Lab1Photos/20170901_151014.jpg)
-Controlling LED Brightness using Voltage Divider
-
-![](./Lab1Photos/20170901_151334.jpg)
-LED Brightness Oscilloscope Waveform 
-
-![](./Lab1Photos/20170901_152811.jpg)
-Reading analog voltage created by voltage divider
-
-![](./Lab1Photos/20170901_153038.jpg)
-Servo Oscilloscope Waveform
-
-![](./Lab1Photos/20170901_162105.jpg)
-Wheels assembled
