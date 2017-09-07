@@ -30,7 +30,7 @@ For the team to gain basic familiarity with the various features of the Arduino 
 ## Procedure
 
 ### Part 1: Modify the Blink Sketch
-First and foremost, install the Arduino IDE from this link.
+First and foremost, install the Arduino IDE from [here](https://www.arduino.cc/en/Main/Software).
 
 The first part of the lab involves modifying the blink sketch -- provided by default in the Arduino IDE -- to blink an external LED. You can find the blink sketch in File > Examples > Basics > Blink (fig 1).
 
@@ -47,7 +47,7 @@ Connect the positive end of the LED to the pin specified in ledPin, and connect 
 
 
 ### Part 2: The Serial Monitor and the Analog Pins
-In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is here.
+In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is [here]http://www.bourns.com/data/global/pdfs/3306.pdf.
 	
 When writing the Arduino code for Part 2, remember to use analog pins. The naming convention for analog pins is A#, with # representing any integer between 0 and 5 (fig. 3).
 
