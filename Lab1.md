@@ -47,11 +47,22 @@ Connect the positive end of the LED to the pin specified in ledPin, and connect 
 
 
 ![](./Lab1Photos/20170901_135738.jpg)
+Blinking LED on Arduino
+
 ![](./Lab1Photos/20170901_143916.jpg)
-![](./Lab1Photos/20170901_151011.jpg)
+Voltage Divider using Potentiometer and 1K Resistor
+
 ![](./Lab1Photos/20170901_151014.jpg)
-![](./Lab1Photos/20170901_151011.jpg)
+Controlling LED Brightness using Voltage Divider
+
 ![](./Lab1Photos/20170901_151334.jpg)
+Unknown Oscilloscope Waveform 1
+
 ![](./Lab1Photos/20170901_152811.jpg)
+Reading analog voltage created by voltage divider
+
 ![](./Lab1Photos/20170901_153038.jpg)
+Unknown Oscilloscope Waveform 2
+
 ![](./Lab1Photos/20170901_162105.jpg)
+Wheels assembled
