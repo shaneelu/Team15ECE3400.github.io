@@ -36,7 +36,7 @@ The first part of the lab involves modifying the blink sketch -- provided by def
 
 Figure 1: Blink Sketch
 
-	To blink an external LED, first declare a variable, ledPin, which stores a number between 0 and 11. This number will determine which pin outputs the the loop signal. In setup() and loop(), replace LED_BUILTIN with your variable, ledPin (fig. 2).
+To blink an external LED, first declare a variable, ledPin, which stores a number between 0 and 11. This number will determine which pin outputs the the loop signal. In setup() and loop(), replace LED_BUILTIN with your variable, ledPin (fig. 2).
 
 
 Figure 2: Modified Blink Sketch. We chose 9 as our ledPin.
@@ -47,16 +47,16 @@ Connect the positive end of the LED to the pin specified in ledPin, and connect 
 
 
 ### Part 2: The Serial Monitor and the Analog Pins
-	In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is here.
+In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is here.
 	
-	When writing the Arduino code for Part 2, remember to use analog pins. The naming convention for analog pins is A#, with # representing any integer between 0 and 5 (fig. 3).
+When writing the Arduino code for Part 2, remember to use analog pins. The naming convention for analog pins is A#, with # representing any integer between 0 and 5 (fig. 3).
 
-	Similar to part 1, in the setup() portion of the code, declare variable pin to be an input. Additionally, add a serial monitor by including Serial.begin(9600). In the loop() portion of the code, print the voltage output from the potentiometer to the serial monitor by adding Serial.println(analogRead(pin)). Finally, it is prudent to add a 500 ms delay between print outputs using delay(500) between each println, lest the screen be flooded with numbers.
+Similar to part 1, in the setup() portion of the code, declare variable pin to be an input. Additionally, add a serial monitor by including Serial.begin(9600). In the loop() portion of the code, print the voltage output from the potentiometer to the serial monitor by adding Serial.println(analogRead(pin)). Finally, it is prudent to add a 500 ms delay between print outputs using delay(500) between each println, lest the screen be flooded with numbers.
 
 
 Figure 3: Analog with Potentiometer code. We chose A0 as our pin.
 
-	When wiring the circuit, connect the middle pin of the potentiometer to your analog pin specified in pin. Remember to add a 330 Ohm resistor between the Arduino’s analog pin and the potentiometer middle pin! Make a voltage divider by adding an approximately 10 kOhm resistor between the 3.3V port and the potentiometer bottom pin. The potentiometer top pin will connect to GND. When running the program, twist the potentiometer clockwise and counterclockwise and observe the changing readouts. It should look something like this:
+When wiring the circuit, connect the middle pin of the potentiometer to your analog pin specified in pin. Remember to add a 330 Ohm resistor between the Arduino’s analog pin and the potentiometer middle pin! Make a voltage divider by adding an approximately 10 kOhm resistor between the 3.3V port and the potentiometer bottom pin. The potentiometer top pin will connect to GND. When running the program, twist the potentiometer clockwise and counterclockwise and observe the changing readouts. It should look something like this:
 
 [VIDEOOO](https://drive.google.com/file/d/0B5FA_MhAcyNYY2t1RjZvcjRuUW8/view)
 
@@ -67,34 +67,35 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
 
-Part 4: Parallax Servos
+## Part 4: Parallax Servos
 This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 41.5Hz, minimum duty cycle is ___ and maximum duty cycle is ___.
+
 Insert the code in figure x below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
-// Controlling servo speed and direction
-#include <Servo.h>
-//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
-int PIN = A0;
-int val = 0;
-Servo s;
+	// Controlling servo speed and direction
+	#include <Servo.h>
+	//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
+	int PIN = A0;
+	int val = 0;
+	Servo s;
 
-void setup() {
-  pinMode(PIN, INPUT);    // Set pin A0 as input
-  s.attach(11);           // Set pin 11 as Servo PWM control
-  Serial.begin(9600);     // Serial displays what mapping does
-}
+	void setup() {
+	  pinMode(PIN, INPUT);    // Set pin A0 as input
+	  s.attach(11);           // Set pin 11 as Servo PWM control
+	  Serial.begin(9600);     // Serial displays what mapping does
+	}
 
-void loop() {
-  val = analogRead(PIN);            // analog voltage read from voltage divider
-  Serial.print("analogRead: ");
-  Serial.print(val);
-  // A value between the range of 0:1023 is mapped to a value in range of 0:180
-  val = map(val, 0, 1023, 0, 180);
-  Serial.print(" mapped to: ");
-  Serial.println(val);
-  s.write(val);   // A value in range of 0:180 is transmitted to servo
-  delay(10);      // Sufficient delay for reaction time
-}
+	void loop() {
+	  val = analogRead(PIN);            // analog voltage read from voltage divider
+	  Serial.print("analogRead: ");
+	  Serial.print(val);
+	  // A value between the range of 0:1023 is mapped to a value in range of 0:180
+	  val = map(val, 0, 1023, 0, 180);
+	  Serial.print(" mapped to: ");
+	  Serial.println(val);
+	  s.write(val);   // A value in range of 0:180 is transmitted to servo
+	  delay(10);      // Sufficient delay for reaction time
+	}
 Figure x
 
 
@@ -103,7 +104,7 @@ Figure x
 ## Mechanical Assembly
 Ben: Describe how to assemble the rubber bands on wheels, wheels to the black attachments to the servo, servo to wheels trusses, and trusses to chassis.
 
-To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
+To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
 
 ## Electrical Assembly
 There are two Servos and one 5V pin on the Arduino. Each Servo consumes up to 50mA and 5V source on Arduino supplies more than 100mA. To power both motors, cut three-3” pieces of solid core wire, hold two together and solder their ends to one wire end as shown in the image, connect one wire to 5V and the other two to the red wire in the Servo connector.
@@ -117,69 +118,70 @@ After assembling the robot, insert the code below into your Arduino IDE and uplo
 
 This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 1157ms was determined by trial and error in getting the robot to turn precisely 90 degrees left.
 
-### code for robot moving in a square
-#include <Servo.h>
-//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
-int val = 160;
-Servo left;
-Servo right;
+	// Code for robot moving in a square
+	#include <Servo.h>
+	//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
+	int val = 160;
+	Servo left;
+	Servo right;
 
-void setup() {
-  // put your setup code here, to run once:
-  left.attach(11);	// Set pin 11 as Left Servo PWM control
-  right.attach(10);	// Set pin 1o as Right Servo PWM control
-}
+	void setup() {
+	  // put your setup code here, to run once:
+	  left.attach(11);	// Set pin 11 as Left Servo PWM control
+	  right.attach(10);	// Set pin 1o as Right Servo PWM control
+	}
 
-// loop function for square
-void loop() {
-  //side of square
-  left.write(val);	// Turns left Servo CCW for forward motion of Robot
-  right.write(-val);	// Turns right Servo CW for forward motion of Robot
-  delay(2000);		// Forward motion for 2 seconds
+	// loop function for square
+	void loop() {
+	  //side of square
+	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
+	  right.write(-val);	// Turns right Servo CW for forward motion of Robot
+	  delay(2000);		// Forward motion for 2 seconds
 
-  //turn ninety degrees counter clockwise
-  left.write(90);		// Stop left Servo so Robot makes a left turn
-  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
-}
+	  //turn ninety degrees counter clockwise
+	  left.write(90);		// Stop left Servo so Robot makes a left turn
+	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
+	}
 
+### Figure 8
 
 This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location figure 8.
 
-### code for robot moving in a figure 8
-#include <Servo.h>
-//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
-int val = 160;
-Servo left;
-Servo right;
+	// Code for robot moving in a figure 8
+	#include <Servo.h>
+	//configure pins; protective resistor = 326 ohms; resistor in series w/ Vcc = 4.64 kohms
+	int val = 160;
+	Servo left;
+	Servo right;
 
-void setup() {
-  // put your setup code here, to run once:
-  left.attach(11);	// Set pin 11 as Left Servo PWM control
-  right.attach(10);	// Set pin 1o as Right Servo PWM control
-}
+	void setup() {
+	  // put your setup code here, to run once:
+	  left.attach(11);	// Set pin 11 as Left Servo PWM control
+	  right.attach(10);	// Set pin 1o as Right Servo PWM control
+	}
 
-//loop function for figure 8
-void loop(){
-  //spin CCW
-  right.write(-val);	// Turns right Servo CW
-  left.write(90);		// Sets left Servo to 0 rpm
-  delay(3775);		// Turn for 3775ms
+	//loop function for figure 8
+	void loop(){
+	  //spin CCW
+	  right.write(-val);	// Turns right Servo CW
+	  left.write(90);		// Sets left Servo to 0 rpm
+	  delay(3775);		// Turn for 3775ms
 
-  //go forward a little
-  right.write(-val);	// Turns right Servo CW for forward motion of Robot
-  left.write(val);	// Turns left Servo CCW for forward motion of Robot
-  delay(450);		// Move forward for 450ms
+	  //go forward a little
+	  right.write(-val);	// Turns right Servo CW for forward motion of Robot
+	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
+	  delay(450);		// Move forward for 450ms
 
-  //spin CW
-  right.write(90);	// Sets right Servo to 0 rpm
-  left.write(val);	// Turns left Servo CCW
-  delay(3775);  	// Turn for 3775ms
+	  //spin CW
+	  right.write(90);	// Sets right Servo to 0 rpm
+	  left.write(val);	// Turns left Servo CCW
+	  delay(3775);  	// Turn for 3775ms
 
-  //go forward a little
-  right.write(-val);	// Turns right Servo CW for forward motion of Robot
-  left.write(val);	// Turns left Servo CCW for forward motion of Robot
-  delay(450);		// Move forward for 450ms
-}
+	  //go forward a little
+	  right.write(-val);	// Turns right Servo CW for forward motion of Robot
+	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
+	  delay(450);		// Move forward for 450ms
+	}
 
 
 
