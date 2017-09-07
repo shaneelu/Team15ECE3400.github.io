@@ -1,7 +1,7 @@
 # Lab 1
 
 ## Premise
-For the team to gain basic familiarity with the various features of the Arduino UNO and Arduino IDE; for the team to begin preliminary construction of the robot using aforementioned familiarity.
+For the team to gain basic familiarity with the various features of the Arduino UNO and Arduino IDE; for the team to begin preliminary construction of the robot.
 
 ## Required Materials
 - 1 Arduino Uno
