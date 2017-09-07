@@ -56,13 +56,13 @@ Voltage Divider using Potentiometer and 1K Resistor
 Controlling LED Brightness using Voltage Divider
 
 ![](./Lab1Photos/20170901_151334.jpg)
-Unknown Oscilloscope Waveform 1
+LED Brightness Oscilloscope Waveform 
 
 ![](./Lab1Photos/20170901_152811.jpg)
 Reading analog voltage created by voltage divider
 
 ![](./Lab1Photos/20170901_153038.jpg)
-Unknown Oscilloscope Waveform 2
+Servo Oscilloscope Waveform
 
 ![](./Lab1Photos/20170901_162105.jpg)
 Wheels assembled
