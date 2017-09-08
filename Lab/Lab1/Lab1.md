@@ -238,4 +238,4 @@ Figure 17. Final code to move in figure 8.
 
 <a href="https://www.thesitewizard.com/" rel="noopener noreferrer" target="_blank">thesitewizard.com</a>
 
-<a href="example.com" target="_blank">New Tab</a>
+<a href="www.google.com" target="_blank">New Tab</a>
