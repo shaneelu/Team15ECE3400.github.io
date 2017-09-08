@@ -38,17 +38,17 @@ The first part of the lab involves modifying the blink sketch -- provided by def
 > Figure 0. Opening blink sketch. 
 
 ![](./Lab1Photos/blinkSketch.JPG)
-Figure 1. What blink sketch looks lke.
+> Figure 1. What blink sketch looks lke.
 
 To blink an external LED, first declare a variable, ledPin, which stores a number between 0 and 11. This number will determine which pin outputs the the loop signal. In setup() and loop(), replace LED_BUILTIN with your variable, ledPin (fig. 2).
 
 ![](./Lab1Photos/editBlink.JPG)
-Figure 2. Modified Blink Sketch. We chose 6 as our ledPin.
+> Figure 2. Modified Blink Sketch. We chose 6 as our ledPin.
 
 Connect the positive end of the LED to the pin specified in ledPin, and connect the negative end of the LED to ground. When wiring your circuit, remember to insert a 330 Ohm resistor in order to protect your Arduino from a short circuit! Compile and run the program. If everything went right, it should look something like this:
 
 ![](./Lab1Photos/20170901_135738.jpg)
-Figure 3. Blinking LED on Arduino
+> Figure 3. Blinking LED on Arduino
 
 [Here's a video!](https://drive.google.com/file/d/0B5FA_MhAcyNYMlNTUUlYcjlwR0k/view)
 
@@ -73,27 +73,27 @@ void loop() {
   delay(500); //in milliseconds!
 }
 ```
-Figure 4. Analog with Potentiometer code. We chose A0 as our pin.
+> Figure 4. Analog with Potentiometer code. We chose A0 as our pin.
 
 When wiring the circuit, connect the middle pin of the potentiometer to your analog pin specified in pin. Remember to add a 330 Ohm resistor between the Arduino’s analog pin and the potentiometer middle pin! Make a voltage divider by adding an approximately 10 kOhm resistor between the 3.3V port and the potentiometer bottom pin. The potentiometer top pin will connect to GND. When running the program, twist the potentiometer clockwise and counterclockwise and observe the changing readouts. It should look something like this:
 
 ![](./Lab1Photos/20170901_143916.jpg)
-Figure 5. Voltage Divider using Potentiometer and 1K Resistor
+> Figure 5. Voltage Divider using Potentiometer and 1K Resistor
 
 [Check out our video!](https://drive.google.com/file/d/0B5FA_MhAcyNYY2t1RjZvcjRuUW8/view)
 
 
 ![](./Lab1Photos/20170901_151334.jpg)
-Figure 6. LED Brightness Oscilloscope Waveform 
+> Figure 6. LED Brightness Oscilloscope Waveform 
 
 ![](./Lab1Photos/20170901_152811.jpg)
-Figure 7. Reading analog voltage created by voltage divider
+> Figure 7. Reading analog voltage created by voltage divider
 
 ## Part 3: Analog Output
 In this part of the lab we were able to overcome the Arduino’s inability to create analog outputs by using a pulse-width modulator (PWM). In order to do this, the output must be connected to a digital output pin on the board that supports PWM. Essentially the same code can be used as the previous part with the potentiometer except the function analogWrite is included to convert the signal to analog form. Then the potentiometer must be mapped to the value for the LED’s brightness. The potentiometer is then able to be used as an analog input to change the brightness of the external LED.
 
 ![](./Lab1Photos/20170901_151014.jpg)
-Figure 8. Controlling LED Brightness using Voltage Divider
+> Figure 8. Controlling LED Brightness using Voltage Divider
 
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
@@ -102,18 +102,18 @@ Figure 8. Controlling LED Brightness using Voltage Divider
 This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 49.5Hz, minimum duty cycle is 2.75% and maximum duty cycle is 12.5%.
 
 ![](./Lab1Photos/180a.jpg)
-Figure 9. Frequency is 49.5Hz
+> Figure 9. Frequency is 49.5Hz
 
 ![](./Lab1Photos/0a.jpg)
-Figure 10. Duty Cycle is 2.75% when 0 written to Servo
+> Figure 10. Duty Cycle is 2.75% when 0 written to Servo
 
 ![](./Lab1Photos/90a.jpg)
-Figure 11. Duty Cycle is 7.5% when 90 written to Servo
+> Figure 11. Duty Cycle is 7.5% when 90 written to Servo
 
 ![](./Lab1Photos/180b.jpg)
-Figure 12. Duty Cycle is 12.5% when 180 written to Servo
+> Figure 12. Duty Cycle is 12.5% when 180 written to Servo
 
-Insert the code below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
+Insert the code below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 850 to 950. This 850 to 950 range was determine through trial and error to be best for control of servo speed. To visualize the voltage in this 850:950 range, (digital value 850:950) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 850:950 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
 	// Controlling servo speed and direction
 	#include <Servo.h>
@@ -132,24 +132,24 @@ Insert the code below into your Arduino IDE. The Servo.h library provides functi
 	  val = analogRead(PIN);            // analog voltage read from voltage divider
 	  Serial.print("analogRead: ");
 	  Serial.print(val);
-	  // A value between the range of 0:1023 is mapped to a value in range of 0:180
-	  val = map(val, 0, 1023, 0, 180);
+	  // A value between the range of 850:950 is mapped to a value in range of 0:180
+	  val = map(val, 850, 950, 0, 180);
 	  Serial.print(" mapped to: ");
 	  Serial.println(val);
 	  s.write(val);   // A value in range of 0:180 is transmitted to servo
 	  delay(10);      // Sufficient delay for reaction time
 	}
-Figure 13. Programming the servos. 
+> Figure 13. Programming the servos. 
 ## Part 5: Assemble and Run Your Robot
 
 ![](./Lab1Photos/Robot.png)
-Figure 14. Assembled Robot
+> Figure 14. Assembled Robot
 
 ### Mechanical Assembly
 To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
 
 ![](./Lab1Photos/20170901_162105.jpg)
-Figure 15. Wheels assembled
+> Figure 15. Wheels assembled
 
 ### Electrical Assembly
 There are two Servos and one 5V pin on the Arduino. Each Servo consumes up to 50mA and 5V source on Arduino supplies more than 100mA. To power both motors, cut three-3” pieces of solid core wire, hold two together and solder their ends to one wire end as shown in the image, connect one wire to 5V and the other two to the red wire in the Servo connector.
@@ -188,7 +188,7 @@ This code is commented to describe how it works. You will see the robot move for
 	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
 	}
 	
-Figure 16. Final code to move in a square
+> Figure 16. Final code to move in a square
 [Square Video](https://drive.google.com/file/d/0B4rO1v98kaZocnJaVWtVRl9NOWM/view)
 
 #### Autonomous Figure 8
@@ -231,11 +231,5 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 	  delay(450);		// Move forward for 450ms
 	}
 	
-Figure 17. Final code to move in figure 8.
+> Figure 17. Final code to move in figure 8.
 [Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
-
-<a href="https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view" target="_blank">https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view</a>
-
-<a href="https://www.thesitewizard.com/" rel="noopener noreferrer" target="_blank">thesitewizard.com</a>
-
-<a href="www.google.com" target="_blank">New Tab</a>
