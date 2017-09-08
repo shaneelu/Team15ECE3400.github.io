@@ -97,21 +97,47 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
 
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
+	int PWMPIN = 3;
+	int AX = A0;
+	int PINNAME = AX;
+	int value;
+	float voltage;
+	int pwmvalue;
+
+	void setup() {
+  	  // put your setup code here, to run once:
+ 	  pinMode(PWMPIN, OUTPUT);
+ 	  pinMode(AX, INPUT);
+ 	  Serial.begin(115200);
+	}
+
+	void loop() {
+  	  // put your main code here, to run repeatedly:
+ 	  value = analogRead(AX);
+ 	  voltage = 5.0/1024.0*value;
+ 	  pwmvalue = value/4;
+  	  Serial.print(voltage);
+ 	  Serial.print("V    ");
+ 	  analogWrite(PWMPIN, pwmvalue);
+ 	  delay(500);
+ 	} 
+
+> Figure 9. Code for Potentiometer-Controlled Circuit
 
 ## Part 4: Parallax Servos
 This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 49.5Hz, minimum duty cycle is 2.75% and maximum duty cycle is 12.5%.
 
 ![](./Lab1Photos/180a.jpg)
-> Figure 9. Frequency is 49.5Hz
+> Figure 10. Frequency is 49.5Hz
 
 ![](./Lab1Photos/0a.jpg)
-> Figure 10. Duty Cycle is 2.75% when 0 written to Servo
+> Figure 11. Duty Cycle is 2.75% when 0 written to Servo
 
 ![](./Lab1Photos/90a.jpg)
-> Figure 11. Duty Cycle is 7.5% when 90 written to Servo
+> Figure 12. Duty Cycle is 7.5% when 90 written to Servo
 
 ![](./Lab1Photos/180b.jpg)
-> Figure 12. Duty Cycle is 12.5% when 180 written to Servo
+> Figure 13. Duty Cycle is 12.5% when 180 written to Servo
 
 Insert the code below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 850 to 950. This 850 to 950 range was determine through trial and error to be best for control of servo speed. To visualize the voltage in this 850:950 range, (digital value 850:950) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 850:950 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
@@ -139,17 +165,17 @@ Insert the code below into your Arduino IDE. The Servo.h library provides functi
 	  s.write(val);   // A value in range of 0:180 is transmitted to servo
 	  delay(10);      // Sufficient delay for reaction time
 	}
-> Figure 13. Programming the servos. 
+> Figure 14. Programming the servos. 
 ## Part 5: Assemble and Run Your Robot
 
 ![](./Lab1Photos/Robot.png)
-> Figure 14. Assembled Robot
+> Figure 15. Assembled Robot
 
 ### Mechanical Assembly
 To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
 
 ![](./Lab1Photos/20170901_162105.jpg)
-> Figure 15. Wheels assembled
+> Figure 16. Wheels assembled
 
 ### Electrical Assembly
 There are two Servos and one 5V pin on the Arduino. Each Servo consumes up to 50mA and 5V source on Arduino supplies more than 100mA. To power both motors, cut three-3” pieces of solid core wire, hold two together and solder their ends to one wire end as shown in the image, connect one wire to 5V and the other two to the red wire in the Servo connector.
@@ -190,7 +216,7 @@ This code is commented to describe how it works. You will see the robot move for
 	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
 	}
 	
-> Figure 16. Final code to move in a square
+> Figure 17. Final code to move in a square
 
 #### Autonomous Figure 8
 [Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
@@ -233,4 +259,4 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 	  delay(450);		// Move forward for 450ms
 	}
 	
-> Figure 17. Final code to move in figure 8.
+> Figure 18. Final code to move in figure 8.
