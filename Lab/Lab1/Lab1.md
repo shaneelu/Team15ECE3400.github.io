@@ -91,19 +91,19 @@ Controlling LED Brightness using Voltage Divider
 
 
 ## Part 4: Parallax Servos
-This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 49.5Hz, minimum duty cycle is 550us and maximum duty cycle is 2500us.
+This part of the lab will control the direction and speed of the Parallax Continuous Rotation Servo using the voltage divider and potentiometer made in part 2. Connect the servo to the Arduino Uno by hooking up the white wire to digital pin 11 which has PWM capability, red wire to the 5V output pin, and black wire to GND. The PWM frequency is 49.5Hz, minimum duty cycle is 2.75% and maximum duty cycle is 12.5%.
 
 ![](./Lab1Photos/180a.jpg)
 Frequency is 49.5Hz
 
 ![](./Lab1Photos/0a.jpg)
-Duty Cycle when 0 written to Servo
+Duty Cycle is 2.75% when 0 written to Servo
 
 ![](./Lab1Photos/90a.jpg)
-Duty Cycle when 90 written to Servo
+Duty Cycle is 7.5% when 90 written to Servo
 
 ![](./Lab1Photos/180b.jpg)
-Duty Cycle when 180 written to Servo
+Duty Cycle is 12.5% when 180 written to Servo
 
 Insert the code in figure x below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
