@@ -236,4 +236,4 @@ Figure 17. Final code to move in figure 8.
 
 <a href="https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view" target="_blank">https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view</a>
 
-<a href="https://www.thesitewizard.com/" target="_blank">thesitewizard.com</a>
+<a href="https://www.thesitewizard.com/" rel="noopener noreferrer" target="_blank">thesitewizard.com</a>
