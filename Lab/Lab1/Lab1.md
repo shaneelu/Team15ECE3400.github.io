@@ -159,6 +159,8 @@ Wrap electrical tape in a circle such that sticky side faces out, place this on 
 ### Software
 
 #### Autonomous Square
+[Square Video](https://drive.google.com/file/d/0B4rO1v98kaZocnJaVWtVRl9NOWM/view)
+
 After assembling the robot, insert the code below into your Arduino IDE and upload to the Arduino Uno. Disconnect the USB A/B cable and power the Uno from the 9V battery.
 
 This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 1157ms was determined by trial and error in getting the robot to turn precisely 90 degrees left.
@@ -190,9 +192,8 @@ This code is commented to describe how it works. You will see the robot move for
 	
 > Figure 16. Final code to move in a square
 
-[Square Video](https://drive.google.com/file/d/0B4rO1v98kaZocnJaVWtVRl9NOWM/view)
-
 #### Autonomous Figure 8
+[Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
 
 To move in a figure 8, the robot moves forward for two seconds, turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location.
 
@@ -233,5 +234,3 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 	}
 	
 > Figure 17. Final code to move in figure 8.
-
-[Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
