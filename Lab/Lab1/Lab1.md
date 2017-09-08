@@ -190,9 +190,9 @@ This code is commented to describe how it works. You will see the robot move for
 Figure 16. Final code to move in a square
 [Square Video](./Square.MOV)
 
-#### Figure 8
+#### Autonomous Figure 8
 
-This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location figure 8.
+To move in a figure 8, the robot moves forward for two seconds, turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location.
 
 	// Code for robot moving in a figure 8
 	#include <Servo.h>
