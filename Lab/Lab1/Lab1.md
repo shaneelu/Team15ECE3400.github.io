@@ -176,6 +176,7 @@ This code is commented to describe how it works. You will see the robot move for
 	  left.write(90);		// Stop left Servo so Robot makes a left turn
 	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
 	}
+[Square Video](./Lab1Photos/Square.MOV)
 
 #### Figure 8
 
@@ -216,3 +217,4 @@ This code is commented to describe how it works. You will see the robot move for
 	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
 	  delay(450);		// Move forward for 450ms
 	}
+[Figure 8 Video](./Lab1Photos/Figure 8.MOV)
