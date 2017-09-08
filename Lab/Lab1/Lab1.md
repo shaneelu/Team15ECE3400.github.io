@@ -173,7 +173,7 @@ Insert the code below into your Arduino IDE. The Servo.h library provides functi
 > Figure 15. Assembled Robot
 
 ### Mechanical Assembly
-To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
+To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis. The final step for creating a functioning base, is to install the ball caster which gives it balance and helps it move.
 
 ![](./Lab1Photos/20170901_162105.jpg)
 > Figure 16. Wheels assembled
