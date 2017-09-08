@@ -134,7 +134,7 @@ Insert the code below into your Arduino IDE. The Servo.h library provides functi
 
 ## Part 5: Assemble and Run Your Robot
 
-[Robot](./Lab1Photos/Robot.png)
+![](./Lab1Photos/Robot.png)
 Assembled Robot
 
 ### Mechanical Assembly
