@@ -29,7 +29,7 @@ For the team to gain basic familiarity with the various features of the Arduino 
 
 ## Procedure
 
-### Part 1: Modify the Blink Sketch
+## Part 1: Modify the Blink Sketch
 First and foremost, install the Arduino IDE from [here](https://www.arduino.cc/en/Main/Software).
 
 The first part of the lab involves modifying the blink sketch -- provided by default in the Arduino IDE -- to blink an external LED. You can find the blink sketch in File > Examples > Basics > Blink (fig 1).
@@ -49,7 +49,7 @@ Blinking LED on Arduino
 [Blinking LED Video](https://drive.google.com/file/d/0B5FA_MhAcyNYMlNTUUlYcjlwR0k/view)
 
 
-### Part 2: The Serial Monitor and the Analog Pins
+## Part 2: The Serial Monitor and the Analog Pins
 In Part 2, we will connect a potentiometer to the Arduino and use the Serial Monitor to read the voltage difference. The datasheet for the potentiometer we used is [here](http://www.bourns.com/data/global/pdfs/3306.pdf).
 	
 When writing the Arduino code for Part 2, remember to use analog pins. The naming convention for analog pins is A#, with # representing any integer between 0 and 5 (fig. 3).
@@ -105,7 +105,7 @@ Duty Cycle is 7.5% when 90 written to Servo
 ![](./Lab1Photos/180b.jpg)
 Duty Cycle is 12.5% when 180 written to Servo
 
-Insert the code in figure x below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
+Insert the code below into your Arduino IDE. The Servo.h library provides functions which make communication with servo simpler. A0 analogRead is used to translate the voltage from the voltage divider into a digital value ranging from 0 to 1023. To visualize the voltage in this 0:1023 range, (digital value 0:1023) * 5V / 1024 = (analog voltage). The map() function provided by the Servo.h library maps the range 0:1023 to range 0:180 and val takes on the new value generated. Warning: the map() function uses integer math and fractional remainders are truncated, so precision is reduced. val is then transmitted to the servo through the s.write function provided by the Servo.h library. The function s.write converts val into a PWM signal, and the servo decodes the pwm using it’s ICs to control its shaft speed and direction. When val=90, servo rotates at 0 rpm; when val is increased from 90 to 180, servo increases speed in CCW direction; when val is decreased from 90 to 0, servo increases speed in CW direction. Further, the servo has a calibration potentiometer right above the place where the cable attaches to the case. This calibration potentiometer must be adjusted until s.write(90) corresponds to 0 rpm. The delay of 10ms provides enough reaction time between the potentiometer being adjusted and the servo changing speed/direction.
 
 	// Controlling servo speed and direction
 	#include <Servo.h>
@@ -131,25 +131,23 @@ Insert the code in figure x below into your Arduino IDE. The Servo.h library pro
 	  s.write(val);   // A value in range of 0:180 is transmitted to servo
 	  delay(10);      // Sufficient delay for reaction time
 	}
-Figure x
-
 
 ## Part 5: Assemble and Run Your Robot
 
-## Mechanical Assembly
+### Mechanical Assembly
 To get the robot up and moving, its base must first be put together with the wheels and servos. First step is to stretch rubber bands around each of the circumferences of the two wheels to give them more grip. Attachments are then connected to each of the wheels using multiple screws and nuts that allow the wheels to then be attached to the servos. After each of the servos are connected to wheel trusses, the trusses are attached to the chassis.
 
 ![](./Lab1Photos/20170901_162105.jpg)
 Wheels assembled
 
-## Electrical Assembly
+### Electrical Assembly
 There are two Servos and one 5V pin on the Arduino. Each Servo consumes up to 50mA and 5V source on Arduino supplies more than 100mA. To power both motors, cut three-3” pieces of solid core wire, hold two together and solder their ends to one wire end as shown in the image, connect one wire to 5V and the other two to the red wire in the Servo connector.
 
 Wrap electrical tape in a circle such that sticky side faces out, place this on bottom of Arduino Uno and attach Uno to top of chassis. Similarly, attach 9V battery using tape to top of chassis. Attach the battery strap to the 9V battery and connect the cable into the barrel connector.
 
-## Software
+### Software
 
-### Autonomous Square
+#### Autonomous Square
 After assembling the robot, insert the code below into your Arduino IDE and upload to the Arduino Uno. Disconnect the USB A/B cable and power the Uno from the 9V battery.
 
 This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 1157ms was determined by trial and error in getting the robot to turn precisely 90 degrees left.
@@ -179,7 +177,7 @@ This code is commented to describe how it works. You will see the robot move for
 	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
 	}
 
-### Figure 8
+#### Figure 8
 
 This code is commented to describe how it works. You will see the robot move forward for two seconds, the robot turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location figure 8.
 
