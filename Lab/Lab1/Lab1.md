@@ -98,30 +98,30 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
 ```
-	int PWMPIN = 3;
-	int AX = A0;
-	int PINNAME = AX;
-	int value;
-	float voltage;
-	int pwmvalue;
+int PWMPIN = 3;
+int AX = A0;
+int PINNAME = AX;
+int value;
+float voltage;
+int pwmvalue;
 
-	void setup() {
-  	  // put your setup code here, to run once:
- 	  pinMode(PWMPIN, OUTPUT);
- 	  pinMode(AX, INPUT);
- 	  Serial.begin(115200);
-	}
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(PWMPIN, OUTPUT);
+  pinMode(AX, INPUT);
+  Serial.begin(115200);
+}
 
-	void loop() {
-  	  // put your main code here, to run repeatedly:
- 	  value = analogRead(AX);
- 	  voltage = 5.0/1024.0*value;
- 	  pwmvalue = value/4;
-  	  Serial.print(voltage);
- 	  Serial.print("V    ");
- 	  analogWrite(PWMPIN, pwmvalue);
- 	  delay(500);
- 	} 
+void loop() {
+  // put your main code here, to run repeatedly:
+  value = analogRead(AX);
+  voltage = 5.0/1024.0*value;
+  pwmvalue = value/4;
+  Serial.print(voltage);
+  Serial.print("V    ");
+  analogWrite(PWMPIN, pwmvalue);
+  delay(500);
+} 
 ```
 > Figure 9. Code for Potentiometer-Controlled Circuit
 
