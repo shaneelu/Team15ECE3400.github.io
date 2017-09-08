@@ -97,6 +97,7 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
 
 [Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
 
+```
 	int PWMPIN = 3;
 	int AX = A0;
 	int PINNAME = AX;
@@ -121,7 +122,7 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
  	  analogWrite(PWMPIN, pwmvalue);
  	  delay(500);
  	} 
-
+```
 > Figure 9. Code for Potentiometer-Controlled Circuit
 
 ## Part 4: Parallax Servos
