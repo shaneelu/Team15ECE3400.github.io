@@ -234,4 +234,6 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 Figure 17. Final code to move in figure 8.
 [Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
 
-<a href="https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view" target="_blank">thesitewizard.com</a>
+<a href="https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view" target="_blank">https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view</a>
+
+<a href="https://www.thesitewizard.com/" target="_blank">thesitewizard.com</a>
