@@ -35,7 +35,7 @@ First and foremost, install the Arduino IDE from [here](https://www.arduino.cc/e
 The first part of the lab involves modifying the blink sketch -- provided by default in the Arduino IDE -- to blink an external LED. You can find the blink sketch in File > Examples > Basics > Blink (fig 0, fig 1).
 
 ![](./Lab1Photos/blinksketch_example.png)
-Figure 0. Opening blink sketch. 
+> Figure 0. Opening blink sketch. 
 
 ![](./Lab1Photos/blinkSketch.JPG)
 Figure 1. What blink sketch looks lke.
@@ -187,6 +187,7 @@ This code is commented to describe how it works. You will see the robot move for
 	  left.write(90);		// Stop left Servo so Robot makes a left turn
 	  delay(1157);		// Turn for 1157ms which corresponds to a right angle turn
 	}
+	
 Figure 16. Final code to move in a square
 [Square Video](./Square.MOV)
 
@@ -229,5 +230,6 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 	  left.write(val);	// Turns left Servo CCW for forward motion of Robot
 	  delay(450);		// Move forward for 450ms
 	}
+	
 Figure 17. Final code to move in figure 8.
 [Figure 8 Video](./Figure 8.MOV)
