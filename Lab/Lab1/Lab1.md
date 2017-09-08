@@ -189,7 +189,7 @@ This code is commented to describe how it works. You will see the robot move for
 	}
 	
 Figure 16. Final code to move in a square
-[Square Video](./Square.MOV)
+[Square Video](https://drive.google.com/drive/u/0/folders/0B4gkBPK8YxULMjh6azBhLTNLVzg)
 
 #### Autonomous Figure 8
 
@@ -232,4 +232,4 @@ To move in a figure 8, the robot moves forward for two seconds, turns left for a
 	}
 	
 Figure 17. Final code to move in figure 8.
-[Figure 8 Video](./Figure 8.MOV)
+[Figure 8 Video](https://drive.google.com/drive/u/0/folders/0B4gkBPK8YxULMjh6azBhLTNLVzg)
