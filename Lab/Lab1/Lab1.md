@@ -43,7 +43,7 @@ Figure 1. What blink sketch looks lke.
 To blink an external LED, first declare a variable, ledPin, which stores a number between 0 and 11. This number will determine which pin outputs the the loop signal. In setup() and loop(), replace LED_BUILTIN with your variable, ledPin (fig. 2).
 
 ![](./Lab1Photos/editBlink.JPG)
-Figure 2. Modified Blink Sketch. We chose 9 as our ledPin.
+Figure 2. Modified Blink Sketch. We chose 6 as our ledPin.
 
 Connect the positive end of the LED to the pin specified in ledPin, and connect the negative end of the LED to ground. When wiring your circuit, remember to insert a 330 Ohm resistor in order to protect your Arduino from a short circuit! Compile and run the program. If everything went right, it should look something like this:
 
