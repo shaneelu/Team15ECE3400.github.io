@@ -4,5 +4,5 @@
 
 ## [September 3](./MeetingMinutes/MM9-3.md)
 
-## [September 8](./MeetingMinutes/MM98.md)
+## [September 8](./MM98.md)
 
