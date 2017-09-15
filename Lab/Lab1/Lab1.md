@@ -50,7 +50,7 @@ Connect the positive end of the LED to the pin specified in ledPin, and connect 
 ![](./Lab1Photos/20170901_135738.jpg)
 > Figure 3. Blinking LED on Arduino
 
-[Here's a video!](https://drive.google.com/file/d/0B5FA_MhAcyNYMlNTUUlYcjlwR0k/view)
+[Here's a video!](https://www.youtube.com/watch?v=L0P3tiu15HI)
 
 
 ## Part 2: The Serial Monitor and the Analog Pins
@@ -80,7 +80,7 @@ When wiring the circuit, connect the middle pin of the potentiometer to your ana
 ![](./Lab1Photos/20170901_143916.jpg)
 > Figure 5. Voltage Divider using Potentiometer and 1K Resistor
 
-[Check out our video!](https://drive.google.com/file/d/0B5FA_MhAcyNYY2t1RjZvcjRuUW8/view)
+[Check out our video!](https://www.youtube.com/watch?v=apEZkhMO2K8)
 
 
 ![](./Lab1Photos/20170901_151334.jpg)
@@ -95,7 +95,7 @@ In this part of the lab we were able to overcome the Arduino’s inability to cr
 ![](./Lab1Photos/20170901_151014.jpg)
 > Figure 8. Controlling LED Brightness using Voltage Divider
 
-[Potentiometer and LED Circuit Video](https://drive.google.com/file/d/0ByhHNtu8Ya5JQ0pva09HQzFiNk0/view?pli=1)
+[Potentiometer and LED Circuit Video](https://www.youtube.com/watch?v=kLc3QBWTu0s)
 
 ```
 int PWMPIN = 3;
@@ -186,7 +186,7 @@ Wrap electrical tape in a circle such that sticky side faces out, place this on 
 ### Software
 
 #### Autonomous Square
-[Square Video](https://drive.google.com/file/d/0B4rO1v98kaZocnJaVWtVRl9NOWM/view)
+[Square Video](https://www.youtube.com/watch?v=vMDUf_4FPPs)
 
 After assembling the robot, insert the code below into your Arduino IDE and upload to the Arduino Uno. Disconnect the USB A/B cable and power the Uno from the 9V battery.
 
@@ -220,7 +220,7 @@ This code is commented to describe how it works. You will see the robot move for
 > Figure 17. Final code to move in a square
 
 #### Autonomous Figure 8
-[Figure 8 Video](https://drive.google.com/file/d/0B4rO1v98kaZoQmJuSW9ZVUpJYVE/view)
+[Figure 8 Video](https://www.youtube.com/watch?v=VTuclTOpsLo)
 
 To move in a figure 8, the robot moves forward for two seconds, turns left for a little more than a second, then repeats these two steps over and over autonomously. The delay of 3775ms was determined by trial and error in getting the robot to turn enough to make a consistent-in-one-location.
 
