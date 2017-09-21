@@ -47,3 +47,13 @@ Before implementing the microphone circuit, we looked over the Open Music Labs A
 The analogRead function has a sampling frequency of 10 kHz, which is sufficient for detecting an audio signal of 660 Hz, but faces limitations in terms of available analog pins. As a result we decided to use ADC directly.
 
 ### Using fft_adc_serial
+<!---![](./Lab2Photos/asdf) 
+> Figure 0. Oscilloscope reading of microphone with signal generator input. --->
+
+<!---![](./Lab2Photos/fft_660.jpg)
+> Figure 1. FFT plot for 660 Hz frequency. (with or without generator?) --->
+
+![](./Lab2Photos/fft_585_660_735.jpg)
+> Figure 2. FFT plot with 585, 660, and 735 Hz frequencies.
+
+
