@@ -6,20 +6,20 @@ The goal of this lab is to use signal processing for treasure-detecting sensors 
 ## Required Materials
 Acoustic Team:
 
-Arduino Uno
-Electret microphone
-1 µF capacitor
-300 Ω resistors
-~3 kΩ resistor
+- Arduino Uno
+- Electret microphone
+- 1 µF capacitor
+- 300 Ω resistors
+- ~3 kΩ resistor
 
 Optical Team:
 
-Arduino Uno [IDE](https://www.arduino.cc/en/Main/Software)
-IR receiver
-300 Ω resistors
-Treasure board 
-Analog filter circuit
-Breadboard
+- Arduino Uno [IDE](https://www.arduino.cc/en/Main/Software)
+- IR receiver
+- 300 Ω resistors
+- Treasure board 
+- Analog filter circuit
+- Breadboard
 
 ## Procedure
 
@@ -39,3 +39,4 @@ Before implementing the microphone circuit, we looked over the Open Music Labs A
 
 The analogRead function has a sampling frequency of 10 kHz, which is sufficient for detecting an audio signal of 660 Hz, but faces limitations in terms of available analog pins. As a result we decided to use ADC directly.
 
+### Using fft_adc_serial
