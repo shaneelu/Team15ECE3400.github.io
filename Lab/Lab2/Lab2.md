@@ -279,15 +279,15 @@ The first step we did was to download the Open Music FFT library and look at the
 The first thing we did was decide on what was a reasonable range that our robot should be able to detect the three treasures. Based on the size of the maze, we estimated that a range of one grid (diagonal of one square), or about twelve inches was an adequate range. 
 			
 ![](./OpticsPhotos/IMG_3792.JPG) 
-Figure 21. IR Sensor Circuit      
+> Figure 21. IR Sensor Circuit      
 
 ![](./OpticsPhotos/phototransistor_circuit.jpg) 
-Figure 22. Original IR Sensor Circuit from Lab Handout
+> Figure 22. Original IR Sensor Circuit from Lab Handout
 
 First we tested the range of the IR sensor without any additional filters or amplifiers. We obtained a treasure from the TA and moved it closer to the IR sensor until the oscilloscope measured a recognizable sinusoidal waveform. We found that without any amplification, the treasure needed to be virtually on the sensor in order for any signal to be detected. Thus, some sort of amplifier was needed to obtain our desired range. 
 
 ![](./OpticsPhotos/IMG_3796 (2).jpg)
-Figure 23. IR Sensor Range Without Amplification
+> Figure 23. IR Sensor Range Without Amplification
 
 Here is the filter and amplifier circuit we used along with a schematic: 
 
