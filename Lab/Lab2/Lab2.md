@@ -270,3 +270,189 @@ Figure 19. Signal generator output of 8,000 Hz 200mVpp
 ![](./AcousticPictures/8kHzFFT.JPG)
 
 Figure 20. Oscilloscope FFT reading has a lot of noise
+
+### Optics
+
+The first step we did was to download the Open Music FFT library and look at the example sketch to get an idea of what the library could do. We also had to consider possible interference from the fluorescent lights in the room. We determined that this would not be an issue since the lights have a frequency of 50-60 Hz, however, since the signals we want to detect are in the kHz range. Additionally, adding a high pass filter to our system would diminish any possible interference from the lights.
+
+#### Determining Signal Range and Needed Circuitry
+The first thing we did was decide on what was a reasonable range that our robot should be able to detect the three treasures. Based on the size of the maze, we estimated that a range of one grid (diagonal of one square), or about twelve inches was an adequate range. 
+			
+![_](./Optics Photos/IMG_3792.JPG) 
+Figure 21. IR Sensor Circuit      
+
+![_](./Optics Photos/phototransistor circuit.jpg) 
+Figure 22. Original IR Sensor Circuit from Lab Handout
+
+First we tested the range of the IR sensor without any additional filters or amplifiers. We obtained a treasure from the TA and moved it closer to the IR sensor until the oscilloscope measured a recognizable sinusoidal waveform. We found that without any amplification, the treasure needed to be virtually on the sensor in order for any signal to be detected. Thus, some sort of amplifier was needed to obtain our desired range. 
+
+![_](./Optics Photos/IMG_3796(2).jpg)
+Figure 23. IR Sensor Range Without Amplification
+
+Here is the filter and amplifier circuit we used along with a schematic: 
+
+![_](./Optics Photos/optics filter and amplifier.jpg)
+
+Figure 24. Optics Filter and Amplifier Implementation
+
+![_](./Optics Photos/optics filter and circuit.jpg)
+
+Figure 25. Optics Filter and Amplifier Circuit
+
+
+Our circuit uses an non-inverting op-amp and high-pass filter. The resistors and capacitor attached to the negative leg of the op-amp determine the gain of our circuit. By changing the ratio of these two resistors, we can increase the gain and therefore the sensitivity of our circuit to input signals. 
+
+#### Tuning the treasure + Op-amp Implementation
+
+##### Overview of steps: 
+Tune the treasure by adjusting the two potentiometers on the treasure and checking frequency on the FFT function on the oscilloscope. 
+Replace the resistor on the branch that connects Vout and 1kΩ with increasing values to optimize gain and range. 
+Check with various target frequencies if range requirements are met. 
+
+##### Details:
+To tune the treasure, we used the oscilloscope’s FFT function to  measure the frequency of the treasure. The potentiometer can be adjusted with a screwdriver until it outputs the desired frequency (i.e 7 kHz, 12 kHz, 17 kHz). The potentiometers to adjust the frequency are the ones closer to the switch labeled H9. One potentiometer is for fine tuning. 
+
+
+![_](./Optics Photos/phototransistor freq.jpg)
+
+Figure 26. Treasure, photo from 3400 Lab Handout
+
+Once the amplifier and high pass filter circuit is built, the circuit can be tested at the targeted frequencies and fine tuned to determine highest gain and range. Our target range was approximately 1 foot or the diagonal of one square of the grid (the longest distance necessary for the robot to detect treasure). 
+
+To find the ideal resistor for the branch that connects Vout to the 1 kΩ resistor in the op amp, we first tested with the 7 kHz frequency. We determined that increasing resistance increases gain since gain is equal to the ratio of the R2 (variable resistor) and R1 (1 kΩ R) such thatAv = R2/1000 = -Vout/Vin. As we increased our resistance and gain, we found that the range of detection for our sensor also increases. We tested our op amp with resistors ranging in between 10 kΩs to 100 kΩs, and calculated gain by checking the Vout and Vin values on the oscilloscope. Our optimal resistor value was at 680 kΩs. 
+
+Here are some examples to demonstrate this effect: 
+
+
+![](./Optics Photos/7khz 0.5.bmp)
+
+
+Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
+
+
+![](./Optics Photos/7khz 5 in.bmp)
+
+Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
+ 
+
+![](./Optics Photos/12khz 12 in.bmp)
+Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
+
+![](./Optics Photos/17khz 12 in.bmp)
+
+Figure 30. Resistance was approximately 800 kΩ. At 17 kHz, the gain was also 1 (same as 12 kHz), but the range was also approximately a foot. However, we see that the FFT peak at 17 kHz is smaller than that of 12 kHz which indicates that the signal is weaker. If we moved closer to the treasure (i.e 10 inches away), the peak would be taller and the gain would increase by a little bit. 
+
+
+We found that over time, even though the gain would increase, the measurable gain of our treasure and sensor was limited. Increasing the resistance beyond 1 MΩ increases the load on the circuit and can damage the circuit. 1 MΩ also picked up lower frequencies and had a lower gain which was not true for lower resistances. Thus, we decided that we would use either a 320 kΩ or 680 kΩ resistor. 
+
+Our range for 7 kHz frequency for 320 kΩs was approximately 11 inches, and our range for 680 kΩs was over 12 inches which met our goals for detection. Hence, we chose the 680 kΩ. We observed that the gain began to steady, but increasing the resistance significantly increased the range. 
+
+To further verify if range increases with resistance, we tuned the treasure to 12 kHz and 17 kHz, and repeated the steps above. We found that the 680 kΩs gives us a range of 12 inches for 12 kHz and a little less than 10 inches for 17 kHz. For 17 kHz, we decided this range was sufficient because the robot will always be moving so distance will naturally decrease. 
+
+
+
+#### High-pass Filter
+The filter in this circuit comes from the 0.022 μF capacitor and two 2.7kΩ resistors connected to the positive leg of the op-amp. These figures were chosen based on the cut-off frequency we wanted as the lower bound for signal detection. Although the lowest treasure we need to detect is 7 kHz, we chose 5 kHz as our cut-off frequency since the filtering response on Bode plots is not immediate and can filter out some frequencies near the nominal cut-off frequency.  Below our the calculations used to determine the cut-off frequency and RC values.
+
+Let fC be the cutoff frequency. We selected fC based on the frequencies we wish to detect and chose C from the capacitors available in the lab room. Now we solve for REQ. We split REQ into two parallel resistors R so that the input to the positive leg of the op-amp will be in the middle of a voltage divider, eliminating some of the DC voltage offset issue. 
+
+![](./Optics Photos/cut off eqns.jpg)
+
+
+To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. An example of this behavior can be found in this video. 
+
+#### Amplification of Signal
+To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 12. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 12) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
+
+![](./Optics Photos/team15optical1.bmp)
+Figure 31. Original Amplified Signal
+
+![](./Optics Photos/team15opticalimprovedd.bmp)
+Figure 32.  Improved Amplified Signal
+
+#### Performing FFT on the Arduino
+Now with our circuitry built and tested, we attached it to the arduino and used Open Music Lab’s FFT to see if we obtained the same results seen on the oscilloscope.
+To verify that the arduino’s FFT result in the correct frequencies. We calculate the frequency range of each bin using the following equation:
+
+Each bin frequency = ((16MHz / 32 prescaler) / 13 clock cycles) / 256 bins = 150 Hz 
+
+To generate data, we utilized the fft_adc_serial sketch to serially read FFT output values continuously. The sketch can be found under File → Examples → FFT → fft_adc_serial.ino (ensure that the Open Music Library is installed and imported). An analog to digital channel (ADC) was initialized and used to read FFT values. Here is a commented version of our code: 
+
+```
+/*
+fft_adc_serial.pde
+guest openmusiclabs.com 7.7.14
+example sketch for testing the fft library.
+it takes in data on ADC0 (Analog0) and processes them
+with the fft. the data is sent out over the serial
+port at 115.2kb.
+*/
+
+#define LOG_OUT 1 // use the log output function
+#define FFT_N 256 // set to 256 point fft
+
+#include <FFT.h> // include the library
+
+void setup() {
+  Serial.begin(115200); // use the serial port
+  TIMSK0 = 0; // turn off timer0 for lower jitter
+  ADCSRA = 0xe5; // set the adc to free running mode
+  ADMUX = 0x45; // use adc5
+  DIDR0 = 0x01; // turn off the digital input for adc0
+}
+
+void loop() {
+  while(1) { // reduces jitter
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf5; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    sei();
+    Serial.println("start");
+    for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+      Serial.println(fft_log_out[i]); // send out the data
+    }
+  }
+}
+
+```
+
+After collecting data, we copied and pasted a single range of bins (128 bin values) into excel and used a bar graph to visualize amplitudes. 
+
+Now looking at the bin responses, we can calculate the frequency with the highest amplitude in each signal. Note that we ignore the first few bins because with the FFT, the first few bins do not contain valid data.
+
+
+![](./Optics Photos/bin 7k.png)
+Figure 33. Amplitude vs FFT frequency. Treasure frequency was 7 kHz. The bin with the highest amplitude was bin 46. Using the frequency range of each bin, bin 46 corresponds to a frequency of 46 * 150 Hz = 6,900 Hz.
+
+![](./Optics Photos/bin 12k.png)
+Figure 34. Amplitude vs FFT frequency. Treasure frequency was 12 kHz. The bin with the highest amplitude was bin 78. This corresponds to a frequency of 78 * 150 Hz = 11,700 Hz.
+
+
+![](./Optics Photos/bin 17k.png)
+Figure 35. Amplitude vs FFT frequency. Treasure frequency was 17 kHz. The relevant bin is bin 114 which equates to 114 * 150 Hz = 17,100 Hz.
+
+We see that the bin number with the highest magnitude is indeed the frequency we calibrated the treasure to. Slight differences such as 12 kHz vs. 11,700 Hz can be attributed to the inaccuracy of us tuning the treasure based on the oscilloscope’s display.
+
+
+
+
+
+
+
+
+
+
+
