@@ -310,13 +310,16 @@ The first thing we did was decide on what was a reasonable range that our robot 
 
 First we tested the range of the IR sensor without any additional filters or amplifiers. We obtained a treasure from the TA and moved it closer to the IR sensor until the oscilloscope measured a recognizable sinusoidal waveform. We found that without any amplification, the treasure needed to be virtually on the sensor in order for any signal to be detected. Thus, some sort of amplifier was needed to obtain our desired range. 
 
+![](./OpticsPhotos/IMG_3796.JPG)
+> Figure 23. IR Sensor Range Without Amplification
+
 Here is the filter and amplifier circuit we used along with a schematic: 
 
 ![](./OpticsPhotos/optics_filter_and _amplifier.png)
-> Figure 23. Optics Filter and Amplifier Implementation
+> Figure 24. Optics Filter and Amplifier Implementation
 
 ![](./OpticsPhotos/optics_filter_and_ circuit.jpg)
-> Figure 24. Optics Filter and Amplifier Circuit
+> Figure 25. Optics Filter and Amplifier Circuit
 
 
 Our circuit uses an non-inverting op-amp and high-pass filter. The resistors and capacitor attached to the negative leg of the op-amp determine the gain of our circuit. By changing the ratio of these two resistors, we can increase the gain and therefore the sensitivity of our circuit to input signals. 
@@ -333,7 +336,7 @@ To tune the treasure, we used the oscilloscope’s FFT function to  measure the 
 
 
 ![](./OpticsPhotos/phototransistor_freq.jpg)
-> Figure 25. Treasure, photo from 3400 Lab Handout
+> Figure 26. Treasure, photo from 3400 Lab Handout
 
 Once the amplifier and high pass filter circuit is built, the circuit can be tested at the targeted frequencies and fine tuned to determine highest gain and range. Our target range was approximately 1 foot or the diagonal of one square of the grid (the longest distance necessary for the robot to detect treasure). 
 
@@ -343,18 +346,18 @@ Here are some examples to demonstrate this effect:
 
 
 ![](./OpticsPhotos/7khz05.bmp)
-> Figure 26. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
+> Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
 
 
 ![](./OpticsPhotos/7khz_5_in.bmp)
-> Figure 27. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
+> Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
  
 
 ![](./OpticsPhotos/12_khz_12_in.bmp)
-> Figure 28. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
+> Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
 
 ![](./OpticsPhotos/17_khz_12_in.bmp)
-> Figure 29. Resistance was approximately 800 kΩ. At 17 kHz, the gain was also 1 (same as 12 kHz), but the range was also approximately a foot. However, we see that the FFT peak at 17 kHz is smaller than that of 12 kHz which indicates that the signal is weaker. If we moved closer to the treasure (i.e 10 inches away), the peak would be taller and the gain would increase by a little bit. 
+> Figure 30. Resistance was approximately 800 kΩ. At 17 kHz, the gain was also 1 (same as 12 kHz), but the range was also approximately a foot. However, we see that the FFT peak at 17 kHz is smaller than that of 12 kHz which indicates that the signal is weaker. If we moved closer to the treasure (i.e 10 inches away), the peak would be taller and the gain would increase by a little bit. 
 
 
 We found that over time, even though the gain would increase, the measurable gain of our treasure and sensor was limited. Increasing the resistance beyond 1 MΩ increases the load on the circuit and can damage the circuit. 1 MΩ also picked up lower frequencies and had a lower gain which was not true for lower resistances. Thus, we decided that we would use either a 320 kΩ or 680 kΩ resistor. 
@@ -376,13 +379,13 @@ To test the filter, we used a function generator to sweep over frequencies and c
 
 
 #### Amplification of Signal
-To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 24. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 24) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
+To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 25. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 25) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
 
 ![](./OpticsPhotos/team15optical1.bmp)
-> Figure 30. Original Amplified Signal
+> Figure 31. Original Amplified Signal
 
 ![](./OpticsPhotos/team15opticalimproved.bmp)
-> Figure 31.  Improved Amplified Signal
+> Figure 32.  Improved Amplified Signal
 
 #### Performing FFT on the Arduino
 Now with our circuitry built and tested, we attached it to the arduino and used Open Music Lab’s FFT to see if we obtained the same results seen on the oscilloscope.
