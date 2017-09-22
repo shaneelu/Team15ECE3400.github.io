@@ -23,7 +23,7 @@ These two characteristics can be handled using an amplifier and filter, respecti
 
 An amplifier increases the magnitude of the input signal from our sensor that is sent to the arduino for analysis. It allows us to detect signals at a farther distance. A common amplifier used in circuits is the operational amplifier or op-amp which amplifies the voltage difference at the two legs of the op-amp. 
 
-![](./AcousticPicturesSCH/SCHNon_InvertingOpAmp.jpg)
+![](./AcousticPictures/SCHNon_InvertingOpAmp.jpg)
 
 Figure 1. Typical Non-inverting Operational Amplifier
 
