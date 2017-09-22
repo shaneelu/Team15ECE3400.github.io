@@ -29,4 +29,98 @@ Link to video of self-adjusting, line-following robot: [Video](https://youtu.be/
 ## Part 2: Autonomous Figure-8 Movement
 The next part of our milestone 1 involved turning and detecting intersections in a grid. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees. To move the robot in a figure-8 pattern, we kept track of the direction the robot would turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, the robot would turn left at an intersection and would keep turning left at intersections until the number of consecutive left turns complete would surpass 4. At that point, y is greater than 4, so the robot would change its turn direction (x = !(x)) and restart its tracking of consecutive turns (y = 0).
 
-Link to video of autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
+Here's a link for video of our robot's autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
+Below is a commented version of the code used:
+```
+#include <Servo.h>
+int QRE1113_PinL = 0; // connect left light sensor to analog pin 0
+int QRE1113_PinR = 1; // connect left light sensor to analog pin 0
+int onLine = 850;     // threshold value for sensor on line
+int onStatL;          // returns boolean for statment "left sensor is on the line"
+int onStatR;          // returns boolean for statment "right sensor is on the line"
+
+int val = 100;        //normal motor speed
+int offVal = 140;     //motor speed when sensor is off line, faster to correct
+Servo left;           //set up left and right motor
+Servo right;
+int x=0;
+int y=1;
+
+void setup() {
+  Serial.begin(9600);
+  left.attach(5);    //connect left servo to pin 11 and right servo to pin 10
+  right.attach(3);
+}
+
+void loop() {
+  //determine whether robot is on the line
+   int QRE_ValueL = analogRead(QRE1113_PinL); //measure light value for left sensor
+   int QRE_ValueR = analogRead(QRE1113_PinR); // measure light value for right sensor
+
+  //determine line status for left sensor
+   if (QRE_ValueL > onLine) onStatL = 1;
+   else onStatL = 0;
+
+   //determine line status for right sensor
+   if (QRE_ValueR > onLine) onStatR = 1;
+   else onStatR = 0;
+
+  //drive servos
+   // if both sensors on either side of line
+   if(!onStatL && !onStatR){
+    left.write(100);            
+    right.write(80);
+    Serial.println("Centered");
+   }
+
+   else if(onStatL && !onStatR){
+    left.write(90);            
+    right.write(80);
+    Serial.println("Robot drifted left");
+   }
+
+   else if(!onStatL && onStatR){
+    left.write(100);            
+    right.write(90);
+    Serial.println("Robot drifted right");
+   }
+  
+    else if((onStatL) && (onStatR)){
+
+      if (x) {
+        left.write(90);
+        right.write(80);
+        y++;
+        if (y>4) { 
+          x=0;
+          y=1;
+        }
+        Serial.println("Turn 90 Degrees Right");
+        delay(1000);
+      }
+      else {
+        left.write(100);
+        right.write(90);
+        y++;
+        if (y>4) { 
+          x=1;
+          y=1;
+        }
+        Serial.println("Turn 90 Degrees Left");     
+        delay(1000);                                     
+      }
+      
+  }
+
+    //if either light sensor is off the line (has onStat_ == 0)  
+  else{
+     left.write(100);
+     right.write(100);
+  }
+
+   Serial.print("\n");
+   delay(2);
+   
+}
+```
+
