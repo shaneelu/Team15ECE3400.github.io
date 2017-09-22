@@ -13,10 +13,10 @@ If robot is off the line, speed should increase to correct its position faster.
 
 Figure 1. Placement of line sensors on robot.
 
-Link to video of self-adjusting, line-following robot: https://youtu.be/CC1JYYBU080
+Link to video of self-adjusting, line-following robot: [Video](https://youtu.be/CC1JYYBU080) 
 
 
 ## Part 2: Autonomous Figure-8 Movement
 The next part of our milestone 1 involved turning and detecting intersections in a grid. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees. To move the robot in a figure-8 pattern, we kept track of the direction the robot would turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, the robot would turn left at an intersection and would keep turning left at intersections until the number of consecutive left turns complete would surpass 4. At that point, y is greater than 4, so the robot would change its turn direction (x = !(x)) and restart its tracking of consecutive turns (y = 0).
 
-Link to video of autonomous figure-8 movement:  https://youtu.be/ZuVscGUPQMY  
+Link to video of autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
