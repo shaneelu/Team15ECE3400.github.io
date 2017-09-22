@@ -373,7 +373,7 @@ Let fC be the cutoff frequency. We selected fC based on the frequencies we wish 
 
 ![](./OpticsPhotos/cutoff_eqns.jpg)
 
-To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. Find an example of this behavior in [this video] (https://www.youtube.com/embed/nhY35if0buA). 
+To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. Find an example of this behavior in this [video] (https://youtu.be/nhY35if0buA). 
 
 
 #### Amplification of Signal
