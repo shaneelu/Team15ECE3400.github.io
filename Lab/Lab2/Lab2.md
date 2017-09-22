@@ -236,6 +236,7 @@ hold on
 
 
 Op-amp Implementation: Acoustics
+
 Next, to ensure that our microphone captures low-volume tones, we implemented a non-inverting op-amp to pick up audio signals. We first tested the our LM358AN op-amp was working correctly by setting up a non-inverting operational amplifier circuit shown in figure 11 and figure 12. R1 is 980 ohms, and R2 is 9.1k ohms. The expected gain is 1 + R2/R1 = 1 + 9100/980 = 10.285.
 
 ![](./AcousticPictures/SCHMicrophone.png)
@@ -256,7 +257,7 @@ We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into vin 
 > Figure 14. Oscilloscope reading of microphone with op-amp implemented.
 
 Band-pass Filter
-After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 14. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. We used 100nF and 33nF capacitors, and 3k ohm and 6.4k ohm resistors.
+After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 15. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. We used 100nF and 33nF capacitors, and 3k ohm and 6.4k ohm resistors.
 
 > fc1 = 550;
 
