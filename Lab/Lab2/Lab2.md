@@ -2,21 +2,22 @@
 
 ## Goals
 The goal of this lab is to use signal processing for treasure-detecting sensors and a microphone sensor. We used the Open Music Lab FFT library for Arduino to implement a digital filter. The acoustics sub-team, composed of Shanee, Daniel, and David, attached a microphone to distinguish a 660 Hz audible start signal; the optical sub-team, composed of Aasta, Erika, and Ben, attached an IR sensor to detect treasures emitting IR light at 7 kHz, 12 kHz, and 17 kHz.
-Background Information
+
+## Background Information
 Before we begin, let’s get started with some relevant background information for this lab.
 
-## What’s an FFT?
+### What’s an FFT?
 The Fourier Transform is an operation that can change a signal in the time domain to a the frequency domain and vice versa. This allows us to view the most prominent frequencies present in our signal. We will be using this to detect the different optical signals emitted by the “treasures” and the audio start signal.
 
 The Fast Fourier Transform (or FFT) is an algorithm used to calculate the Fourier Transform on a discrete signal. FFT usually takes three steps: decomposition, finding the spectra of each point, and reordering the data from each point. The first step of the FFT algorithm is to break up the signal into individual data points and sort the data. This is usually done in terms of time and requires that the signal have a length that is a power of two. Once the signal is decomposed, the frequency spectrum of each datapoint is taken and then all the points are sorted back together. 
 
 For going from the time to frequency domain, the resulting output of an FFT is an array of “bins” with each bin representing a range of frequencies. Each data point holds information in two bins. In Open Music Lab’s implementation of the FFT, the even bins are used to store the real component of the signal while the odd bins are used for the imaginary component. To find the magnitude of the frequency at each data point, we simply have to add the squares of the magnitudes for the real and imaginary components and take the square root. This is simple since we assume our signal is completely real and assign zeros for all the imaginary components. After completing the FFT, we can now see which bin and therefore which frequencies in our signal had the highest magnitude.
 
-This is only a brief explanation of the FFT, for more information about FFT algorithms check out Wolfram Alpha and the DSP Guide. 
+This is only a brief explanation of the FFT, for more information about FFT algorithms check out [Wolfram Alpha](http://mathworld.wolfram.com/FastFourierTransform.html) and the [DSP Guide](http://www.dspguide.com/ch12/2.htm).
 
-For sample calculations of each bin’s frequency range and determining the most prominent frequency in our signal see calculations in the Acoustic Team and Optical Team sections. 
+For sample calculations of each bin’s frequency range and determining the most prominent frequency in our signal see calculations in the Acoustic Team and Optical Team sections.
 
-## Signal Manipulation: Amplification and Filtering
+### Signal Manipulation: Amplification and Filtering
 For our goal, we need to worry about two aspects of the input signal: the strength of the signal that our sensor can detect and the accuracy of the frequency we calculate from the signal. 
 
 These two characteristics can be handled using an amplifier and filter, respectively.
