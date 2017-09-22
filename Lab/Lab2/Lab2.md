@@ -69,12 +69,19 @@ Filters are important for removing noise that may interfere with the signal we w
 Before implementing the microphone circuit, we looked over the Open Music Labs Arduino FFT library documentation and the ADC on the Arduino microcontroller (ATmega328). The datasheet (beginning section 28, page 305) indicates that:
 
 > The ADC has 10-bit resolution.
+
 > At a resolution of 10 bits, an ADC conversion takes 13 clock cycles.
+
 > The ADC clock is preset at a speed of 125 kHz. Therefore, the preset ADC sampling frequency is 125 kHz / 13 = 9.6 kHz.
+
 > The ADC sampling frequency of 9.6 kHz is using the default prescaler of 128, which can be set using the last 3 bits of the ADCSRA register. Max sampling frequency is 615 kHz at a prescaler of 2.
+
 > For maximum resolution, the Arduino takes an input clock frequency of 50 to 200 kHz.
+
 > ADC initialization takes 15 clock cycles.
+
 > The output is stored in ADCL and ADCH and is 1024*(analog input voltage)/5V.
+
 > The ADC can be set to Free Running mode to continuously update the ADCL and ADCH values. 
 
 The analogRead function has a sampling frequency of 10 kHz, which is sufficient for detecting an audio signal of 660 Hz, but faces limitations in terms of available analog pins. As a result we decided to use ADC directly.
