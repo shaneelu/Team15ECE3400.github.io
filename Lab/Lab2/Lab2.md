@@ -29,7 +29,7 @@ An amplifier increases the magnitude of the input signal from our sensor that is
 
 Notice the resistors attached to the negative leg of the op-amp (Figure 1), this is a feedback loop. Feedback loops are usually a network of resistors and capacitors that create a transfer function between the input and output of the amplifier. The ratio and configuration of these components determine the gain, or level of amplification of our output signal compared to the input signal. In this case the gain is 1+ R2/R1.
 
-Read more about op amps here.
+Read more about op amps [here](http://www.electronics-tutorials.ws/opamp/opamp_1.html).
 
 Filters are important for removing noise that may interfere with the signal we want to detect. For example, if we want to detect a 660 Hz starting signal, we have to ensure that other frequencies from background noise or talking will not interfere with our sensor. There are three different types of filters: low-pass, high-pass, and band-pass. Low-pass filters allow frequencies below a threshold value, called the cut-off frequency, to pass unaltered while diminishing the magnitude of frequencies above cut-off. A high-pass filter does the opposite and leaves frequencies greater than the cut-off frequency unaltered while filtering out lower frequencies. The band-pass filter combines the low-pass and high-pass filter and only allows frequencies within a certain range (or band) to pass through.
 
@@ -37,20 +37,31 @@ Filters are important for removing noise that may interfere with the signal we w
 ### Acoustic Team:
 
 > Arduino Uno
+
 > Electret microphone
+
 > 1 µF capacitor
+
 > 300 Ω resistors
+
 > ~3 kΩ resistor
 
 ### Optical Team:
 
 > Arduino Uno
+
 > IR receiver
+
 > 300 Ω resistors
+
 > Treasure board 
+
 > Analog filter circuit
+
 > Breadboard
+
 > Procedure
+
 > Acoustic Team
 
 ## Acoustics
@@ -98,8 +109,11 @@ However, 735 Hz would also fall into bin 5 since
 To increase our resolution in frequency analysis, we increased the clock division factor from 32 to 128. This was done by changing ADCSRA’s value in the FFT example script shown in figure  from 0xe5 to 0xe7 in setup{ }, and from 0xf5 to 0xf7 in loop{ }. The LSB in 0xe5 and 0xf5 are 101 which correspond to clock division factor 32, and the LSB in 0xe7 and 0xf7 are 111 which correspond to clock division factor 128. This information is found in the Atmega328 datasheet table 28-5. Since the given script takes 256 samples for each FFT run, each bin has a width of 37.5 Hz (9600/256). The following equations were realized
 
 > 16MHz/128 prescalar/ 13 clock cycles/ 256 samples = 37.56Hz
+
 > 660Hz/37.65Hz=17.53
+
 > 585Hz/37.65Hz=15.54
+
 > 735Hz/37.65Hz=19.52
 
 The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 735Hz and made it a simple task to use software to differentiate between these tones as shown in figure 5. A MATLAB script in figure 8 was setup to read data from Arduino serial port and plot the data in figure 5.
@@ -108,7 +122,7 @@ The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 73
 > Figure 6. MATLAB FFT plot with 585, 660, and 735 Hz frequencies.
 
 
-This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED, circled in figure 9, on the Arduino is lit to indicate that 660Hz is detected, and the built in LED is off when a frequency less than or equal to 585Hz, or greater than or equal to 735Hz. This video shows the built in LED reacting to the three input frequencies: https://youtu.be/tWlF1rdGw6Y
+This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED, circled in figure 9, on the Arduino is lit to indicate that 660Hz is detected, and the built in LED is off when a frequency less than or equal to 585Hz, or greater than or equal to 735Hz. This [video](https://youtu.be/tWlF1rdGw6Y) shows the built in LED reacting to the three input frequencies.
 
 ```
 /*
