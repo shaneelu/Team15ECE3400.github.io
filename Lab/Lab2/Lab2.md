@@ -24,8 +24,7 @@ These two characteristics can be handled using an amplifier and filter, respecti
 An amplifier increases the magnitude of the input signal from our sensor that is sent to the arduino for analysis. It allows us to detect signals at a farther distance. A common amplifier used in circuits is the operational amplifier or op-amp which amplifies the voltage difference at the two legs of the op-amp. 
 
 ![](./AcousticPictures/SCHNon_InvertingOpAmp.jpg)
-
-Figure 1. Typical Non-inverting Operational Amplifier
+> Figure 1. Typical Non-inverting Operational Amplifier
 
 Notice the resistors attached to the negative leg of the op-amp (Figure 1), this is a feedback loop. Feedback loops are usually a network of resistors and capacitors that create a transfer function between the input and output of the amplifier. The ratio and configuration of these components determine the gain, or level of amplification of our output signal compared to the input signal. In this case the gain is 1+ R2/R1.
 
@@ -72,22 +71,18 @@ The analogRead function has a sampling frequency of 10 kHz, which is sufficient 
 After installing the Open Music Labs FFT library, we looked at the fft_adc_serial example which performs FFT on the analog input and prints the magnitude on the serial monitor. To test the script, we used a signal generator to produce a 660 Hz, 1 Vpp signal with zero offset and plotted the data that was printed in serial by the example script into a graph in excel. We performed this for analogRead and ADC read. These graphs are shown in figure 2 and 3. We also measured the signal with an oscilloscope to confirm the signal’s frequency shown in figure 4.
 
 ![](./AcousticPictures/FFTanalogRead.png)
-
-Figure 2. FFT using analogRead with signal generator input 660 Hz
+> Figure 2. FFT using analogRead with signal generator input 660 Hz
 
 ![](./AcousticPictures/FFTADC.png)
-
-Figure 3. FFT using ADC with signal generator input 660 Hz
+> Figure 3. FFT using ADC with signal generator input 660 Hz
 
 To compare the ADC with analogRead, in figure 2 the 660 Hz peak showed up at around the 18th bin using the ADC, whereas in figure 3 the 660 Hz peak showed up around the 20th bin using analogRead due to the additional delay of analogRead, confirming our decision to use the ADC.
 
 ![](./AcousticPictures/Oscope660.jpg)
-
-Figure 4. Oscilloscope measurement with signal generator input 660 Hz
+> Figure 4. Oscilloscope measurement with signal generator input 660 Hz
 
 ![](./AcousticPictures/MicrophoneSetup.jpg)
-
-Figure 5. Microphone circuit with signal generator input and oscilloscope measurement.
+> Figure 5. Microphone circuit with signal generator input and oscilloscope measurement.
 
 We then connected the microphone to the Arduino as shown in figure 5. and used the FFT library to analyze the data. 660 Hz was found to be in bin 5 which matches the following calculation, where 4.39 is 5 due to software delay.
 
@@ -108,8 +103,7 @@ To increase our resolution in frequency analysis, we increased the clock divisio
 The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 735Hz and made it a simple task to use software to differentiate between these tones as shown in figure 5. A MATLAB script in figure 8 was setup to read data from Arduino serial port and plot the data in figure 5.
 
 ![](./AcousticPictures/FFTMATLABPlot.png)
-
-Figure 6. MATLAB FFT plot with 585, 660, and 735 Hz frequencies.
+> Figure 6. MATLAB FFT plot with 585, 660, and 735 Hz frequencies.
 
 
 This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED, circled in figure 9, on the Arduino is lit to indicate that 660Hz is detected, and the built in LED is off when a frequency less than or equal to 585Hz, or greater than or equal to 735Hz. This video shows the built in LED reacting to the three input frequencies: https://youtu.be/tWlF1rdGw6Y
@@ -182,7 +176,7 @@ else {
     
 }
 ```
-Figure 7. Arduino Code for Taking FFT
+> Figure 7. Arduino Code for Taking FFT
 
 ```
 % MATLAB script which reads data from Arduino serial port and plots a frequency vs. amplitude graph
@@ -212,64 +206,52 @@ grid on
 set(gca,'XTick',z); % places ticker marks 1 to 30
 hold on
 ```
-Figure 8. MATLAB script reads from Arduino serial and plots graphs like figure 5
+> Figure 8. MATLAB script reads from Arduino serial and plots graphs like figure 5
 
 ![](./AcousticPictures/ArduinoBuiltInLED.jpg)
-
-Figure 9. Arduino built in LED used to signal detection of audio signal
+> Figure 9. Arduino built in LED used to signal detection of audio signal
 
 
 Op-amp Implementation: Acoustics
 Next, to ensure that our microphone captures low-volume tones, we implemented a non-inverting op-amp to pick up audio signals. We first tested the our LM358AN op-amp was working correctly by setting up a non-inverting operational amplifier circuit shown in figure 11 and figure 12.
 
 ![](./AcousticPictures/SCHMicrophone.png)
-
-Figure 10. Original Microphone Circuit from Lab Handout
+> Figure 10. Original Microphone Circuit from Lab Handout
 
 ![](./AcousticPictures/SCHNon_InvertingOpAmp.jpg)
-
-Figure 11. Non-inverting Op-amp template.
+> Figure 11. Non-inverting Op-amp template.
 
 ![](./AcousticPictures/Non-InvertingOpAmp.JPG)
-
-Figure 12. Op-amp implementation.
+> Figure 12. Op-amp implementation.
 
 We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into vin of the non-inverting op amp circuit and measured vout with an oscilloscope. The oscilloscope reading showed a gain of 10X figure 14 which shows that the op-amp works.
 
 ![](./AcousticPictures/660HzSignalGenerator.JPG)
-
-Figure 13. Signal generator output of 660 Hz 200mVpp
+> Figure 13. Signal generator output of 660 Hz 200mVpp
 
 ![](./AcousticPictures/660HzOscilloscope.JPG)
-
-Figure 14. Oscilloscope reading of microphone with op-amp implemented.
+> Figure 14. Oscilloscope reading of microphone with op-amp implemented.
 
 Band-pass Filter
 After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 14. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. However, the oscilloscope FFT readings showed a lot of noise and did not filter out high frequency noise. Figure 18 shows readings from vout of the band pass filter when a 800 Hz signal that was fed by a signal generator into vin of band pass filter. Also, Figure 20 shows readings from vout of the band pass filter when a 8,000 Hz signal that was fed by a signal generator into vin of band pass filter.
 
 ![](./AcousticPictures/SCHBandPadd.jpg)
-
-Figure 15. Multiple feedback band-pass filter.
+> Figure 15. Multiple feedback band-pass filter.
 
 ![](./AcousticPictures/BandPassSetUp.JPG)
-
-Figure 16. Band-pass implementation.
+> Figure 16. Band-pass implementation.
 
 ![](./AcousticPictures/800HzSignalGenerator.JPG)
-
-Figure 17. Signal generator output of 800 Hz 200mVpp
+> Figure 17. Signal generator output of 800 Hz 200mVpp
 
 ![](./AcousticPictures/800HzFFT.JPG)
-
-Figure 18. Oscilloscope FFT reading has a lot of noise
+> Figure 18. Oscilloscope FFT reading has a lot of noise
 
 ![](./AcousticPictures/8kHzSignalGenerator.JPG)
-
-Figure 19. Signal generator output of 8,000 Hz 200mVpp
+> Figure 19. Signal generator output of 8,000 Hz 200mVpp
 
 ![](./AcousticPictures/8kHzFFT.JPG)
-
-Figure 20. Oscilloscope FFT reading has a lot of noise
+> Figure 20. Oscilloscope FFT reading has a lot of noise
 
 ### Optics
 
@@ -292,12 +274,10 @@ First we tested the range of the IR sensor without any additional filters or amp
 Here is the filter and amplifier circuit we used along with a schematic: 
 
 ![](./OpticsPhotos/optics_filter_and _amplifier.png)
-
-Figure 24. Optics Filter and Amplifier Implementation
+> Figure 24. Optics Filter and Amplifier Implementation
 
 ![](./OpticsPhotos/optics_filter_and_ circuit.jpg)
-
-Figure 25. Optics Filter and Amplifier Circuit
+> Figure 25. Optics Filter and Amplifier Circuit
 
 
 Our circuit uses an non-inverting op-amp and high-pass filter. The resistors and capacitor attached to the negative leg of the op-amp determine the gain of our circuit. By changing the ratio of these two resistors, we can increase the gain and therefore the sensitivity of our circuit to input signals. 
@@ -314,8 +294,7 @@ To tune the treasure, we used the oscilloscope’s FFT function to  measure the 
 
 
 ![](./OpticsPhotos/phototransistor_freq.jpg)
-
-Figure 26. Treasure, photo from 3400 Lab Handout
+> Figure 26. Treasure, photo from 3400 Lab Handout
 
 Once the amplifier and high pass filter circuit is built, the circuit can be tested at the targeted frequencies and fine tuned to determine highest gain and range. Our target range was approximately 1 foot or the diagonal of one square of the grid (the longest distance necessary for the robot to detect treasure). 
 
@@ -325,23 +304,18 @@ Here are some examples to demonstrate this effect:
 
 
 ![](./OpticsPhotos/7khz_0.5.bmp)
-
-
-Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
+> Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
 
 
 ![](./OpticsPhotos/7khz_5_in.bmp)
-
-Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
+> Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
  
 
 ![](./OpticsPhotos/12khz_12_in.bmp)
+> Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
 
-Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
-
-![](./OpticsPhotos/17khz_12_in.bmp)
-
-Figure 30. Resistance was approximately 800 kΩ. At 17 kHz, the gain was also 1 (same as 12 kHz), but the range was also approximately a foot. However, we see that the FFT peak at 17 kHz is smaller than that of 12 kHz which indicates that the signal is weaker. If we moved closer to the treasure (i.e 10 inches away), the peak would be taller and the gain would increase by a little bit. 
+![](./OpticsPhotos/17_khz_12_in.bmp)
+> Figure 30. Resistance was approximately 800 kΩ. At 17 kHz, the gain was also 1 (same as 12 kHz), but the range was also approximately a foot. However, we see that the FFT peak at 17 kHz is smaller than that of 12 kHz which indicates that the signal is weaker. If we moved closer to the treasure (i.e 10 inches away), the peak would be taller and the gain would increase by a little bit. 
 
 
 We found that over time, even though the gain would increase, the measurable gain of our treasure and sensor was limited. Increasing the resistance beyond 1 MΩ increases the load on the circuit and can damage the circuit. 1 MΩ also picked up lower frequencies and had a lower gain which was not true for lower resistances. Thus, we decided that we would use either a 320 kΩ or 680 kΩ resistor. 
@@ -357,7 +331,7 @@ The filter in this circuit comes from the 0.022 μF capacitor and two 2.7kΩ res
 
 Let fC be the cutoff frequency. We selected fC based on the frequencies we wish to detect and chose C from the capacitors available in the lab room. Now we solve for REQ. We split REQ into two parallel resistors R so that the input to the positive leg of the op-amp will be in the middle of a voltage divider, eliminating some of the DC voltage offset issue. 
 
-![](./OpticsPhotos/cut_off_eqns.jpg)
+![](./OpticsPhotos/cutoff_eqns.jpg)
 
 To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. An example of this behavior can be found in this video. 
 
@@ -365,12 +339,10 @@ To test the filter, we used a function generator to sweep over frequencies and c
 To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 12. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 12) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
 
 ![](./OpticsPhotos/team15optical1.bmp)
+> Figure 31. Original Amplified Signal
 
-Figure 31. Original Amplified Signal
-
-![](./OpticsPhotos/team15opticalimprovedd.bmp)
-
-Figure 32.  Improved Amplified Signal
+![](./OpticsPhotos/team15opticalimproved.bmp)
+> Figure 32.  Improved Amplified Signal
 
 #### Performing FFT on the Arduino
 Now with our circuitry built and tested, we attached it to the arduino and used Open Music Lab’s FFT to see if we obtained the same results seen on the oscilloscope.
@@ -437,14 +409,14 @@ Now looking at the bin responses, we can calculate the frequency with the highes
 
 
 ![](./OpticsPhotos/bin_7k.png)
-Figure 33. Amplitude vs FFT frequency. Treasure frequency was 7 kHz. The bin with the highest amplitude was bin 46. Using the frequency range of each bin, bin 46 corresponds to a frequency of 46 * 150 Hz = 6,900 Hz.
+> Figure 33. Amplitude vs FFT frequency. Treasure frequency was 7 kHz. The bin with the highest amplitude was bin 46. Using the frequency range of each bin, bin 46 corresponds to a frequency of 46 * 150 Hz = 6,900 Hz.
 
 ![](./OpticsPhotos/bin_12k.png)
-Figure 34. Amplitude vs FFT frequency. Treasure frequency was 12 kHz. The bin with the highest amplitude was bin 78. This corresponds to a frequency of 78 * 150 Hz = 11,700 Hz.
+> Figure 34. Amplitude vs FFT frequency. Treasure frequency was 12 kHz. The bin with the highest amplitude was bin 78. This corresponds to a frequency of 78 * 150 Hz = 11,700 Hz.
 
 
 ![](./OpticsPhotos/bin_17k.png)
-Figure 35. Amplitude vs FFT frequency. Treasure frequency was 17 kHz. The relevant bin is bin 114 which equates to 114 * 150 Hz = 17,100 Hz.
+> Figure 35. Amplitude vs FFT frequency. Treasure frequency was 17 kHz. The relevant bin is bin 114 which equates to 114 * 150 Hz = 17,100 Hz.
 
 We see that the bin number with the highest magnitude is indeed the frequency we calibrated the treasure to. Slight differences such as 12 kHz vs. 11,700 Hz can be attributed to the inaccuracy of us tuning the treasure based on the oscilloscope’s display.
 
