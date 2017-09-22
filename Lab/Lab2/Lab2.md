@@ -23,7 +23,8 @@ These two characteristics can be handled using an amplifier and filter, respecti
 
 An amplifier increases the magnitude of the input signal from our sensor that is sent to the arduino for analysis. It allows us to detect signals at a farther distance. A common amplifier used in circuits is the operational amplifier or op-amp which amplifies the voltage difference at the two legs of the op-amp. 
 
-[](./AcousticPicturesSCH/SCHNon_InvertingOpAmp.jpg)
+![](./AcousticPicturesSCH/SCHNon_InvertingOpAmp.jpg)
+
 Figure 1. Typical Non-inverting Operational Amplifier
 
 Notice the resistors attached to the negative leg of the op-amp (Figure 1), this is a feedback loop. Feedback loops are usually a network of resistors and capacitors that create a transfer function between the input and output of the amplifier. The ratio and configuration of these components determine the gain, or level of amplification of our output signal compared to the input signal. In this case the gain is 1+ R2/R1.
