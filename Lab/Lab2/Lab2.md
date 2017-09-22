@@ -66,7 +66,7 @@ Filters are important for removing noise that may interfere with the signal we w
 
 ## Acoustics
 
-Before implementing the microphone circuit, we looked over the Open Music Labs Arduino FFT library documentation and the ADC on the Arduino microcontroller (ATmega328). The datasheet (beginning section 28, page 305) indicates that:
+Before implementing the microphone circuit, we looked over the Open Music Labs Arduino FFT library documentation and the ADC on the Arduino microcontroller (ATmega328). The [datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf) (beginning section 28, page 305) indicates that:
 
 > The ADC has 10-bit resolution.
 
@@ -113,7 +113,7 @@ However, 735 Hz would also fall into bin 5 since
 
 > 735Hz/150.24Hz=4.89
 
-To increase our resolution in frequency analysis, we increased the clock division factor from 32 to 128. This was done by changing ADCSRA’s value in the FFT example script shown in figure  from 0xe5 to 0xe7 in setup{ }, and from 0xf5 to 0xf7 in loop{ }. The LSB in 0xe5 and 0xf5 are 101 which correspond to clock division factor 32, and the LSB in 0xe7 and 0xf7 are 111 which correspond to clock division factor 128. This information is found in the Atmega328 datasheet table 28-5. Since the given script takes 256 samples for each FFT run, each bin has a width of 37.5 Hz (9600/256). The following equations were realized
+To increase our resolution in frequency analysis, we increased the clock division factor from 32 to 128. This was done by changing ADCSRA’s value in the FFT example script shown in figure  from 0xe5 to 0xe7 in setup{ }, and from 0xf5 to 0xf7 in loop{ }. The LSB in 0xe5 and 0xf5 are 101 which correspond to clock division factor 32, and the LSB in 0xe7 and 0xf7 are 111 which correspond to clock division factor 128. This information is found in the Atmega328 [datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf) table 28-5. Since the given script takes 256 samples for each FFT run, each bin has a width of 37.5 Hz (9600/256). The following equations were realized
 
 > 16MHz/128 prescalar/ 13 clock cycles/ 256 samples = 37.56Hz
 
@@ -294,7 +294,7 @@ However, we did not understand the circuit well enough to create this band pass.
 
 ## Optics
 
-The first step we did was to download the Open Music FFT library and look at the example sketch to get an idea of what the library could do. We also had to consider possible interference from the fluorescent lights in the room. We determined that this would not be an issue since the lights have a frequency of 50-60 Hz, however, since the signals we want to detect are in the kHz range. Additionally, adding a high pass filter to our system would diminish any possible interference from the lights.
+The first step we did was to download the [Open Music FFT library](http://wiki.openmusiclabs.com/wiki/ArduinoFFT) and look at the example sketch to get an idea of what the library could do. We also had to consider possible interference from the fluorescent lights in the room. We determined that this would not be an issue since the lights have a frequency of 50-60 Hz, however, since the signals we want to detect are in the kHz range. Additionally, adding a high pass filter to our system would diminish any possible interference from the lights.
 
 #### Determining Signal Range and Needed Circuitry
 The first thing we did was decide on what was a reasonable range that our robot should be able to detect the three treasures. Based on the size of the maze, we estimated that a range of one grid (diagonal of one square), or about twelve inches was an adequate range. 
