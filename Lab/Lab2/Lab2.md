@@ -62,9 +62,7 @@ Filters are important for removing noise that may interfere with the signal we w
 
 > Breadboard
 
-> Procedure
-
-> Acoustic Team
+# Procedure
 
 ## Acoustics
 
