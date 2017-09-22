@@ -5,7 +5,7 @@
 
 ## [Meeting Minutes](./MeetingMinutes/MeetingMinutes.md)
 
-## [Milestones](./Milestone1.md)
+## [Milestones](.//Milestones/)
 
 ## [About Us](./AboutUs.md)
 
