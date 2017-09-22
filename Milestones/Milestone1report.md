@@ -9,9 +9,13 @@ Figure 1. Placement of line sensors on robot.
 
 Now we determine under what conditions should each servo move or stop. Here's the logic we used:
 >If left sensor detects line (has a value greater than that indicating a dark surface) and right sensor detects line, robot is perpendicular to the line and needs to turn in one direction.
+
 >If left sensor is on the line and right sensor is not, robot drifted left and needs to turn slightly right.
+
 >If right sensor is on the line and left sensor is not, robot drifted right and needs to turn slightly left.
+
 >If both sensors detect light (are not on the line), then the robot is centered on the line. 
+
 >If robot is off the line, speed should increase to correct its position faster. 
 
 Link to video of self-adjusting, line-following robot: [Video](https://youtu.be/CC1JYYBU080) 
