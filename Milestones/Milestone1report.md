@@ -5,10 +5,10 @@ Our goal for milestone 1 was to have our robot autonomously follow a line in a f
 ## Part 1: Line Detection
 For our robot to detect and follow a simple, straight line, we first tested the QRE1113 line sensors to see what values corresponded with light and dark surfaces. With those values, we decided to place two line sensors in the center, spaced apart with a distance slightly greater than the width of the line. Using two sensors instead of four guaranteed that there would be sufficient analog pins. With this design the two values provide information on which way to adjust:
 
-![](./Milestone 1/IMG_3844.JPG)
+![](./Milestone1/IMG_3845.JPG)
 Figure 1. Placement of line sensors on robot. (Front View)
 
-![](./Milestone 1/IMG_3845.JPG)
+![](./Milestone1/IMG_3844.JPG)
 Figure 2. Placement of line sensors on robot. (Side View)
 
 Now we determine under what conditions should each servo move or stop. Here's the logic we used:
