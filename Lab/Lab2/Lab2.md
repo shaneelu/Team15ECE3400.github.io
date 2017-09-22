@@ -286,16 +286,16 @@ Figure 22. Original IR Sensor Circuit from Lab Handout
 
 First we tested the range of the IR sensor without any additional filters or amplifiers. We obtained a treasure from the TA and moved it closer to the IR sensor until the oscilloscope measured a recognizable sinusoidal waveform. We found that without any amplification, the treasure needed to be virtually on the sensor in order for any signal to be detected. Thus, some sort of amplifier was needed to obtain our desired range. 
 
-![](./OpticsPhotos/IMG_3796(2).jpg)
+![](./OpticsPhotos/IMG_3796 (2).jpg)
 Figure 23. IR Sensor Range Without Amplification
 
 Here is the filter and amplifier circuit we used along with a schematic: 
 
-![](./OpticsPhotos/optics_filter_and_amplifier.jpg)
+![](./OpticsPhotos/optics_filter_and _amplifier.png)
 
 Figure 24. Optics Filter and Amplifier Implementation
 
-![](./OpticsPhotos/optics_filter_and_circuit.jpg)
+![](./OpticsPhotos/optics_filter_and_ circuit.jpg)
 
 Figure 25. Optics Filter and Amplifier Circuit
 
