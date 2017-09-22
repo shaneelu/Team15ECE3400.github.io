@@ -71,18 +71,21 @@ The analogRead function has a sampling frequency of 10 kHz, which is sufficient 
 
 After installing the Open Music Labs FFT library, we looked at the fft_adc_serial example which performs FFT on the analog input and prints the magnitude on the serial monitor. To test the script, we used a signal generator to produce a 660 Hz, 1 Vpp signal with zero offset and plotted the data that was printed in serial by the example script into a graph in excel. We performed this for analogRead and ADC read. These graphs are shown in figure 2 and 3. We also measured the signal with an oscilloscope to confirm the signal’s frequency shown in figure 4.
 
+![](./AcousticPictures/FFTanalogRead.png)
 
 Figure 2. FFT using analogRead with signal generator input 660 Hz
 
+![](./AcousticPictures/FFTADC.png)
 
 Figure 3. FFT using ADC with signal generator input 660 Hz
 
 To compare the ADC with analogRead, in figure 2 the 660 Hz peak showed up at around the 18th bin using the ADC, whereas in figure 3 the 660 Hz peak showed up around the 20th bin using analogRead due to the additional delay of analogRead, confirming our decision to use the ADC.
 
-
+![](./AcousticPictures/Oscope660.jpg)
 
 Figure 4. Oscilloscope measurement with signal generator input 660 Hz
 
+![](./AcousticPictures/MicrophoneSetup.jpg)
 
 Figure 5. Microphone circuit with signal generator input and oscilloscope measurement.
 
@@ -104,9 +107,9 @@ To increase our resolution in frequency analysis, we increased the clock divisio
 
 The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 735Hz and made it a simple task to use software to differentiate between these tones as shown in figure 5. A MATLAB script in figure 8 was setup to read data from Arduino serial port and plot the data in figure 5.
 
+![](./AcousticPictures/FFTMATLABPlot.png)
 
-
-Figure 6. FFT plot with 585, 660, and 735 Hz frequencies.
+Figure 6. MATLAB FFT plot with 585, 660, and 735 Hz frequencies.
 
 
 This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED, circled in figure 9, on the Arduino is lit to indicate that 660Hz is detected, and the built in LED is off when a frequency less than or equal to 585Hz, or greater than or equal to 735Hz. This video shows the built in LED reacting to the three input frequencies: https://youtu.be/tWlF1rdGw6Y
@@ -211,6 +214,7 @@ hold on
 ```
 Figure 8. MATLAB script reads from Arduino serial and plots graphs like figure 5
 
+![](./AcousticPictures/ArduinoBuiltInLED.jpg)
 
 Figure 9. Arduino built in LED used to signal detection of audio signal
 
@@ -218,38 +222,51 @@ Figure 9. Arduino built in LED used to signal detection of audio signal
 Op-amp Implementation: Acoustics
 Next, to ensure that our microphone captures low-volume tones, we implemented a non-inverting op-amp to pick up audio signals. We first tested the our LM358AN op-amp was working correctly by setting up a non-inverting operational amplifier circuit shown in figure 11 and figure 12.
 
+![](./AcousticPictures/SCHMicrophone.png)
 
 Figure 10. Original Microphone Circuit from Lab Handout
 
+![](./AcousticPictures/SCHNon_InvertingOpAmp.jpg)
+
 Figure 11. Non-inverting Op-amp template.
 
+![](./AcousticPictures/Non-InvertingOpAmp.JPG)
 
 Figure 12. Op-amp implementation.
 
 We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into vin of the non-inverting op amp circuit and measured vout with an oscilloscope. The oscilloscope reading showed a gain of 10X figure 14 which shows that the op-amp works.
 
+![](./AcousticPictures/660HzSignalGenerator.JPG)
 
 Figure 13. Signal generator output of 660 Hz 200mVpp
 
+![](./AcousticPictures/660HzOscilloscope.JPG)
 
 Figure 14. Oscilloscope reading of microphone with op-amp implemented.
 
 Band-pass Filter
 After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 14. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. However, the oscilloscope FFT readings showed a lot of noise and did not filter out high frequency noise. Figure 18 shows readings from vout of the band pass filter when a 800 Hz signal that was fed by a signal generator into vin of band pass filter. Also, Figure 20 shows readings from vout of the band pass filter when a 8,000 Hz signal that was fed by a signal generator into vin of band pass filter.
 
-Figure 14. Multiple feedback band-pass filter.
+![](./AcousticPictures/SCHBandPadd.jpg)
 
+Figure 15. Multiple feedback band-pass filter.
 
+![](./AcousticPictures/BandPassSetUp.JPG)
 
 Figure 16. Band-pass implementation.
 
+![](./AcousticPictures/800HzSignalGenerator.JPG)
 
 Figure 17. Signal generator output of 800 Hz 200mVpp
 
+![](./AcousticPictures/800HzFFT.JPG)
 
 Figure 18. Oscilloscope FFT reading has a lot of noise
 
+![](./AcousticPictures/8kHzSignalGenerator.JPG)
+
 Figure 19. Signal generator output of 8,000 Hz 200mVpp
 
+![](./AcousticPictures/8kHzFFT.JPG)
 
 Figure 20. Oscilloscope FFT reading has a lot of noise
