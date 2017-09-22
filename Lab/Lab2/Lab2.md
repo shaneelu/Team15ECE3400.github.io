@@ -22,16 +22,16 @@ For our goal, we need to worry about two aspects of the input signal: the streng
 
 These two characteristics can be handled using an amplifier and filter, respectively.
 
-An amplifier increases the magnitude of the input signal from our sensor that is sent to the arduino for analysis. It allows us to detect signals at a farther distance. A common amplifier used in circuits is the operational amplifier or op-amp which amplifies the voltage difference at the two legs of the op-amp. 
+An amplifier increases the magnitude of the input signal from our sensor that is sent to the arduino for analysis. It allows us to detect signals at a farther distance. A common amplifier used in circuits is the operational amplifier, or op-amp, which amplifies the voltage difference at the two legs of the op-amp. 
 
 ![](./AcousticPictures/SCHNon_InvertingOpAmp.jpg)
 > Figure 1. Typical Non-inverting Operational Amplifier
 
-Notice the resistors attached to the negative leg of the op-amp (Figure 1), this is a feedback loop. Feedback loops are usually a network of resistors and capacitors that create a transfer function between the input and output of the amplifier. The ratio and configuration of these components determine the gain, or level of amplification of our output signal compared to the input signal. In this case the gain is 1+ R2/R1.
+Notice the resistors attached to the negative leg of the op-amp (Figure 1). This is a feedback loop. Feedback loops are usually a network of resistors and capacitors that create a transfer function between the input and output of the amplifier. The ratio and configuration of these components determine the gain, or level of amplification of our output signal compared to the input signal. In this case the gain is 1+ R2/R1.
 
 Read more about op amps [here](http://www.electronics-tutorials.ws/opamp/opamp_1.html).
 
-Filters are important for removing noise that may interfere with the signal we want to detect. For example, if we want to detect a 660 Hz starting signal, we have to ensure that other frequencies from background noise or talking will not interfere with our sensor. There are three different types of filters: low-pass, high-pass, and band-pass. Low-pass filters allow frequencies below a threshold value, called the cut-off frequency, to pass unaltered while diminishing the magnitude of frequencies above cut-off. A high-pass filter does the opposite and leaves frequencies greater than the cut-off frequency unaltered while filtering out lower frequencies. The band-pass filter combines the low-pass and high-pass filter and only allows frequencies within a certain range (or band) to pass through.
+Filters are important for removing noise that may interfere with the signal we want to detect. For example, if we want to detect a 660 Hz starting signal, we have to ensure that other frequencies from background noise, such as human speech, will not interfere with our sensor. There are three different types of filters: low-pass, high-pass, and band-pass. Low-pass filters allow frequencies below a threshold value, called the cut-off frequency, to pass unaltered while diminishing the magnitude of frequencies above cut-off. A high-pass filter does the opposite, leaving frequencies greater than the cut-off frequency unaltered while filtering out lower frequencies. The band-pass filter combines the low-pass and high-pass filter and only allows frequencies within a certain range (or band) to pass through.
 
 ## Required Materials
 ### Acoustic Team:
@@ -45,6 +45,8 @@ Filters are important for removing noise that may interfere with the signal we w
 > 300 Ω resistors
 
 > ~3 kΩ resistor
+
+> LM358AN operational amplifier
 
 ### Optical Team:
 
@@ -104,7 +106,7 @@ To compare the ADC with analogRead, in figure 2 the 660 Hz peak showed up at aro
 ![](./AcousticPictures/MicrophoneSetup.jpg)
 > Figure 5. Microphone circuit with signal generator input and oscilloscope measurement.
 
-We then connected the microphone to the Arduino as shown in figure 5. and used the FFT library to analyze the data. 660 Hz was found to be in bin 5 which matches the following calculation, where 4.39 is 5 due to software delay.
+We then connected the microphone to the Arduino as shown in figure 5. and used the FFT library to analyze the data. 660 Hz was found to be in bin 5, which matches the following calculation. Note that 4.39 is rounded to 5 due to software delay.
 
 > 16MHz/32 prescalar/ 13 clock cycles/ 256 samples = 150.24Hz
 > 660Hz/150.24Hz=4.39
@@ -113,7 +115,7 @@ However, 735 Hz would also fall into bin 5 since
 
 > 735Hz/150.24Hz=4.89
 
-To increase our resolution in frequency analysis, we increased the clock division factor from 32 to 128. This was done by changing ADCSRA’s value in the FFT example script shown in figure  from 0xe5 to 0xe7 in setup{ }, and from 0xf5 to 0xf7 in loop{ }. The LSB in 0xe5 and 0xf5 are 101 which correspond to clock division factor 32, and the LSB in 0xe7 and 0xf7 are 111 which correspond to clock division factor 128. This information is found in the Atmega328 [datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf) table 28-5. Since the given script takes 256 samples for each FFT run, each bin has a width of 37.5 Hz (9600/256). The following equations were realized
+To increase our resolution in frequency analysis, we increased the clock division factor from 32 to 128. This was done by changing ADCSRA’s value in the FFT example script shown in figure  from 0xe5 to 0xe7 in setup{ }, and from 0xf5 to 0xf7 in loop{ }. The LSB in 0xe5 and 0xf5 is 101, which corresponds to clock division factor 32, while the LSB in 0xe7 and 0xf7 is 111, which corresponds to clock division factor 128. This information is found in the Atmega328 [datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf) table 28-5. Since the given script takes 256 samples for each FFT run, each bin has a width of 37.5 Hz (9600/256). The following equations were realized:
 
 > 16MHz/128 prescalar/ 13 clock cycles/ 256 samples = 37.56Hz
 
@@ -123,13 +125,13 @@ To increase our resolution in frequency analysis, we increased the clock divisio
 
 > 735Hz/37.65Hz=19.52
 
-The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 735Hz and made it a simple task to use software to differentiate between these tones as shown in figure 5. A MATLAB script in figure 8 was setup to read data from Arduino serial port and plot the data in figure 5.
+The 128 clock division factor increased the spacing between 660Hz, 585Hz, and 735Hz, thus making it a simple task to use software to differentiate between these tones, as shown in figure 5. The MATLAB script in figure 8 was setup to read data from Arduino serial port and plot the data in figure 5.
 
 ![](./AcousticPictures/FFTMATLABPlot.png)
 > Figure 6. MATLAB FFT plot with 585, 660, and 735 Hz frequencies.
 
 
-This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED, circled in figure 9, on the Arduino is lit to indicate that 660Hz is detected, and the built in LED is off when a frequency less than or equal to 585Hz, or greater than or equal to 735Hz. This [video](https://youtu.be/tWlF1rdGw6Y) shows the built in LED reacting to the three input frequencies.
+This code in figure 7 takes 256 samples and uses FFT functions to detect whether the input frequency is 660Hz. This code was tested with input frequencies of 585Hz, 660Hz, and 735Hz. A built in LED on the Arduino board, circled in figure 9, is lit whenever the 660Hz frequency is detected, turning off when a frequency less than or equal to 585Hz or greater than or equal to 735Hz. This [video](https://youtu.be/tWlF1rdGw6Y) shows the built in LED reacting to the three input frequencies.
 
 ```
 /*
@@ -234,8 +236,7 @@ hold on
 ![](./AcousticPictures/ArduinoBuiltInLED.jpg)
 > Figure 9. Arduino built in LED used to signal detection of audio signal
 
-
-Op-amp Implementation: Acoustics
+### Op-amp Implementation: Acoustics
 
 Next, to ensure that our microphone captures low-volume tones, we implemented a non-inverting op-amp to pick up audio signals. We first tested the our LM358AN op-amp was working correctly by setting up a non-inverting operational amplifier circuit shown in figure 11 and figure 12. R1 is 980 ohms, and R2 is 9.1k ohms. The expected gain is 1 + R2/R1 = 1 + 9100/980 = 10.285.
 
@@ -248,7 +249,7 @@ Next, to ensure that our microphone captures low-volume tones, we implemented a 
 ![](./AcousticPictures/Non-InvertingOpAmp.JPG)
 > Figure 12. Op-amp implementation.
 
-We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into vin of the non-inverting op amp circuit and measured vout with an oscilloscope. The oscilloscope reading showed a gain of 10X figure 14 which shows that the op-amp works.
+We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into Vin of the non-inverting op amp circuit and measured Vout with an oscilloscope. The oscilloscope reading showed a gain of 10X figure 14 which shows that the op-amp works.
 
 ![](./AcousticPictures/660HzSignalGenerator.JPG)
 > Figure 13. Signal generator output of 660 Hz 200mVpp
@@ -256,7 +257,8 @@ We then generated a 660 Hz signal with amplitude of 200 mVpp figure 13 into vin 
 ![](./AcousticPictures/660HzOscilloscope.JPG)
 > Figure 14. Oscilloscope reading of microphone with op-amp implemented.
 
-Band-pass Filter
+### Band-pass Filter
+
 After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 15. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. We used 100nF and 33nF capacitors, and 3k ohm and 6.4k ohm resistors.
 
 > fc1 = 550;
@@ -273,7 +275,7 @@ After successfully testing the op-amp, we attempted to add a multiple feedback b
 
 > Voltage_Gain = -R2/R1 = -2.22
 
-However, we did not understand the circuit well enough to create this band pass. This bandpass requires an op amp that can take in a +5V and -5V in order to center the signal, but the LM358AN only has Vcc and GND. Due to our misconception of the LM358AN's capabilities, we observed on the oscilloscope a mix of a sinusoidal and triangular waveform when at 660 Hz and at any other frequency. This triangular shape showed that the signal had many frequency components which were observed in the oscilloscopes FFT math mode. The FFT math mode showed a lot of noise and showed that our non-bandpass filter was actually a noise generator. We tested to see if the bandpass was working at all, so we checked to see the drop in decibels between a 800 Hz and 8,000 Hz signal. Figure 18 shows readings from vout of the band pass filter when a 800 Hz signal that was fed by a signal generator into vin of band pass filter. Figure 20 shows readings from vout of the band pass filter when a 8,000 Hz signal that was fed by a signal generator into vin of band pass filter. The drop is 1 decibel which shows that the bandpass doesn't work.
+However, we did not understand the circuit well enough to create this band pass. This bandpass requires an op amp that can take in a +5V and -5V in order to center the signal, but the LM358AN only has Vcc and GND. Due to our misconception of the LM358AN's capabilities, we observed on the oscilloscope a mix of a sinusoidal and triangular waveforms when at 660 Hz and at any other frequency. This triangular shape showed that the signal had many frequency components which were observed in the oscilloscopes FFT math mode. The FFT math mode showed a lot of noise and showed that our non-bandpass filter was actually a noise generator. We tested to see if the bandpass was working at all, so we checked to see the drop in decibels between a 800 Hz and 8,000 Hz signal. Figure 18 shows readings from Vout of the band pass filter when a 800 Hz signal that was fed by a signal generator into Vin of band pass filter. Figure 20 shows readings from Vout of the band pass filter when a 8,000 Hz signal that was fed by a signal generator into Vin of band pass filter. As shown by the oscilloscope readouts, the drop is only 1 decibel, which shows that the bandpass does not work.
 
 ![](./AcousticPictures/SCHBandPadd.jpg)
 > Figure 15. Multiple feedback band-pass filter.
