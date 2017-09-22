@@ -84,7 +84,7 @@ Before implementing the microphone circuit, we looked over the Open Music Labs A
 
 > The ADC can be set to Free Running mode to continuously update the ADCL and ADCH values. 
 
-The analogRead function has a sampling frequency of 10 kHz, which is sufficient for detecting an audio signal of 660 Hz, but faces limitations in terms of available analog pins. As a result we decided to use ADC directly.
+> The analogRead function has a sampling frequency of 10 kHz, which is sufficient for detecting an audio signal of 660 Hz, but faces limitations in terms of available analog pins. As a result we decided to use ADC directly.
 
 ### Using fft_adc_serial
 
@@ -259,11 +259,17 @@ Band-pass Filter
 After successfully testing the op-amp, we attempted to add a multiple feedback band-pass filter shown in the schematic in figure 14. The band pass filter was designed to cut off frequencies above 750 Hz and below 550 Hz. We used 100nF and 33nF capacitors, and 3k ohm and 6.4k ohm resistors.
 
 > fc1 = 550;
+
 > fc2 = 750;
+
 > C1 = 100E-9;
+
 > C2 = 33E-9;
+
 > R1 = 1/(2*pi*C1*fc1) = 2.89k ohms
+
 > R2 = 1/(2*pi*C2*fc2) = 6.43 k ohms
+
 > Voltage_Gain = -R2/R1 = -2.22
 
 However, we did not understand the circuit well enough to create this band pass. This bandpass requires an op amp that can take in a +5V and -5V in order to center the signal, but the LM358AN only has Vcc and GND. Due to our misconception of the LM358AN's capabilities, we observed on the oscilloscope a mix of a sinusoidal and triangular waveform when at 660 Hz and at any other frequency. This triangular shape showed that the signal had many frequency components which were observed in the oscilloscopes FFT math mode. The FFT math mode showed a lot of noise and showed that our non-bandpass filter was actually a noise generator. We tested to see if the bandpass was working at all, so we checked to see the drop in decibels between a 800 Hz and 8,000 Hz signal. Figure 18 shows readings from vout of the band pass filter when a 800 Hz signal that was fed by a signal generator into vin of band pass filter. Figure 20 shows readings from vout of the band pass filter when a 8,000 Hz signal that was fed by a signal generator into vin of band pass filter. The drop is 1 decibel which shows that the bandpass doesn't work.
