@@ -338,7 +338,7 @@ To tune the treasure, we used the oscilloscope’s FFT function to  measure the 
 
 Once the amplifier and high pass filter circuit is built, the circuit can be tested at the targeted frequencies and fine tuned to determine highest gain and range. Our target range was approximately 1 foot or the diagonal of one square of the grid (the longest distance necessary for the robot to detect treasure). 
 
-To find the ideal resistor for the branch that connects Vout to the 1 kΩ resistor in the op amp, we first tested with the 7 kHz frequency. We determined that increasing resistance increases gain since gain is equal to the ratio of the R2 (variable resistor) and R1 (1 kΩ R) such thatAv = R2/1000 = -Vout/Vin. As we increased our resistance and gain, we found that the range of detection for our sensor also increases. We tested our op amp with resistors ranging in between 10 kΩs to 100 kΩs, and calculated gain by checking the Vout and Vin values on the oscilloscope. Our optimal resistor value was at 680 kΩs. 
+To find the ideal resistor for the branch that connects Vout to the 1 kΩ resistor in the op amp, we first tested with the 7 kHz frequency. We determined that increasing resistance increases gain since gain is equal to the ratio of the R2 (variable resistor) and R1 (1 kΩ R) such that Av = -Vout/Vin. As we increased our resistance and gain, we found that the range of detection for our sensor also increases. We tested our op amp with resistors ranging in between 10 kΩs to 100 kΩs, and calculated gain by checking the Vout and Vin values on the oscilloscope. Our optimal resistor value was at 680 kΩs. 
 
 Here are some examples to demonstrate this effect: 
 
@@ -373,10 +373,11 @@ Let fC be the cutoff frequency. We selected fC based on the frequencies we wish 
 
 ![](./OpticsPhotos/cutoff_eqns.jpg)
 
-To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. An example of this behavior can be found in this video. 
+To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. Find an example of this behavior in [this video] (https://www.youtube.com/embed/nhY35if0buA). 
+
 
 #### Amplification of Signal
-To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 12. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 12) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
+To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 25. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 25) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
 
 ![](./OpticsPhotos/team15optical1.bmp)
 > Figure 31. Original Amplified Signal
