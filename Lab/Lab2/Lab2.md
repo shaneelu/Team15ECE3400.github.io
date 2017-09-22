@@ -461,7 +461,9 @@ Now looking at the bin responses, we can calculate the frequency with the highes
 We see that the bin number with the highest magnitude is indeed the frequency we calibrated the treasure to. Slight differences such as 12 kHz vs. 11,700 Hz can be attributed to the inaccuracy of us tuning the treasure based on the oscilloscope’s display.
 
 
+##References
 
+> [Lab 2 Instructions](https://cei-lab.github.io/ece3400/lab2.html)
 
 
 
