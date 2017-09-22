@@ -303,7 +303,7 @@ To find the ideal resistor for the branch that connects Vout to the 1 kΩ resist
 Here are some examples to demonstrate this effect: 
 
 
-![](./OpticsPhotos/7khz_05.bmp)
+![](./OpticsPhotos/7khz05.bmp)
 > Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
 
 
