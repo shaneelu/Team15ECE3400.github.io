@@ -278,24 +278,24 @@ The first step we did was to download the Open Music FFT library and look at the
 #### Determining Signal Range and Needed Circuitry
 The first thing we did was decide on what was a reasonable range that our robot should be able to detect the three treasures. Based on the size of the maze, we estimated that a range of one grid (diagonal of one square), or about twelve inches was an adequate range. 
 			
-![_](./Optics Photos/IMG_3792.JPG) 
+![](./Optics Photos/IMG_3792.JPG) 
 Figure 21. IR Sensor Circuit      
 
-![_](./Optics Photos/phototransistor circuit.jpg) 
+![](./Optics Photos/phototransistor circuit.jpg) 
 Figure 22. Original IR Sensor Circuit from Lab Handout
 
 First we tested the range of the IR sensor without any additional filters or amplifiers. We obtained a treasure from the TA and moved it closer to the IR sensor until the oscilloscope measured a recognizable sinusoidal waveform. We found that without any amplification, the treasure needed to be virtually on the sensor in order for any signal to be detected. Thus, some sort of amplifier was needed to obtain our desired range. 
 
-![_](./Optics Photos/IMG_3796(2).jpg)
+![](./Optics Photos/IMG_3796(2).jpg)
 Figure 23. IR Sensor Range Without Amplification
 
 Here is the filter and amplifier circuit we used along with a schematic: 
 
-![_](./Optics Photos/optics filter and amplifier.jpg)
+![](./Optics Photos/optics filter and amplifier.jpg)
 
 Figure 24. Optics Filter and Amplifier Implementation
 
-![_](./Optics Photos/optics filter and circuit.jpg)
+![](./Optics Photos/optics filter and circuit.jpg)
 
 Figure 25. Optics Filter and Amplifier Circuit
 
@@ -313,7 +313,7 @@ Check with various target frequencies if range requirements are met.
 To tune the treasure, we used the oscilloscope’s FFT function to  measure the frequency of the treasure. The potentiometer can be adjusted with a screwdriver until it outputs the desired frequency (i.e 7 kHz, 12 kHz, 17 kHz). The potentiometers to adjust the frequency are the ones closer to the switch labeled H9. One potentiometer is for fine tuning. 
 
 
-![_](./Optics Photos/phototransistor freq.jpg)
+![](./Optics Photos/phototransistor freq.jpg)
 
 Figure 26. Treasure, photo from 3400 Lab Handout
 
@@ -336,6 +336,7 @@ Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a 
  
 
 ![](./Optics Photos/12khz 12 in.bmp)
+
 Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
 
 ![](./Optics Photos/17khz 12 in.bmp)
@@ -358,16 +359,17 @@ Let fC be the cutoff frequency. We selected fC based on the frequencies we wish 
 
 ![](./Optics Photos/cut off eqns.jpg)
 
-
 To test the filter, we used a function generator to sweep over frequencies and check if the circuit accurately filters out lower frequencies. As we modulated our frequency (decreased it), we observed that the amplitude of our output sinusoid stabilized close to the cut off. An example of this behavior can be found in this video. 
 
 #### Amplification of Signal
 To amplify the signal before it reaches the arduino, the circuit that we used includes an operation-amplifier (op-amp). After trying out different op-amps and failing to get enough of an amplification, we decided on the circuit in figure 12. The op-amp in this circuit is set up as a non-inverting op-amp, which has a gain of 1+ R2/R1. This improved amplifier and filter circuit increased the signals gain by about 12x. The capacitor connected to ground and the 1k resistor in the schematic (figure 12) provides low impedance to lower frequencies of the signal and helps filter out higher frequencies that are unnecessary. 
 
 ![](./Optics Photos/team15optical1.bmp)
+
 Figure 31. Original Amplified Signal
 
 ![](./Optics Photos/team15opticalimprovedd.bmp)
+
 Figure 32.  Improved Amplified Signal
 
 #### Performing FFT on the Arduino
