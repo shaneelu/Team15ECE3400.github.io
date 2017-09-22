@@ -229,7 +229,7 @@ grid on
 set(gca,'XTick',z); % places ticker marks 1 to 30
 hold on
 ```
-> Figure 8. MATLAB script reads from Arduino serial and plots graphs like figure 5
+> Figure 8. MATLAB script reads from Arduino serial and plots graphs like figure 6
 
 ![](./AcousticPictures/ArduinoBuiltInLED.jpg)
 > Figure 9. Arduino built in LED used to signal detection of audio signal
