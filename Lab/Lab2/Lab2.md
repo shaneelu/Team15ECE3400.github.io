@@ -303,7 +303,7 @@ To find the ideal resistor for the branch that connects Vout to the 1 kΩ resist
 Here are some examples to demonstrate this effect: 
 
 
-![](./OpticsPhotos/7khz_0.5.bmp)
+![](./OpticsPhotos/7khz_05.bmp)
 > Figure 27. The first measurement taken to test if the treasure works. At 7 kHz and the sensor being 0.5 inches away from the treasure, the gain is 10  but the range is extremely small. Optimizing the gain and range fixes this problem. 
 
 
@@ -311,7 +311,7 @@ Here are some examples to demonstrate this effect:
 > Figure 28. At 7 kHz and a gain of 3.5, the circuit detected the treasure from a maximum of 5 inches away. The farther the treasure was, the smaller the peak on the FFT. 
  
 
-![](./OpticsPhotos/12khz_12_in.bmp)
+![](./OpticsPhotos/12_khz_12_in.bmp)
 > Figure 29. Resistance was approximately 800 kΩ. At 12 kHz and a gain of 1, we achieved a distance of 12 inches which means that even if the robot is a foot away, the treasure should be detected prominently. Here too, the farther the treasure, the smaller the peak on the FFT. 
 
 ![](./OpticsPhotos/17_khz_12_in.bmp)
