@@ -70,60 +70,69 @@ void loop() {
    else onStatR = 0;
 
   //drive servos
-   // if both sensors on either side of line
+   // if both sensors on either side of line, the robot is centered
    if(!onStatL && !onStatR){
+    // continue traveling straight
+    // Note that servos rotate in opposite direction, 90 is 0rpm,
+    // so values 100 to left servo and 80 to right servo cause forward motion
     left.write(100);            
     right.write(80);
     Serial.println("Centered");
    }
 
+    // if left sensor is on the line, and right sensor is off the line, the robot drifted right
    else if(onStatL && !onStatR){
+    // put left wheel to 0rpm and rotate right wheel forward to turn robot left to straighten heading
     left.write(90);            
     right.write(80);
-    Serial.println("Robot drifted left");
-   }
-
-   else if(!onStatL && onStatR){
-    left.write(100);            
-    right.write(90);
     Serial.println("Robot drifted right");
    }
-  
-    else if((onStatL) && (onStatR)){
 
+    // if left sensor is off the line, and right sensor is on the line, the robot drifted left
+   else if(!onStatL && onStatR){
+   // put right wheel to 0rpm and rotate left wheel forward to turn robot right to straighten heading
+    left.write(100);            
+    right.write(90);
+    Serial.println("Robot drifted left");
+   }
+  
+  // if both sensors are on the lines, an intersection is reached
+    else if((onStatL) && (onStatR)){
+    // when x becomes 1, the robot turns right at intersections four times
       if (x) {
         left.write(90);
         right.write(80);
-        y++;
-        if (y>4) { 
+        y++; // y increments at each turn
+        if (y>4) { // this changes the turning direction and resets y
           x=0;
           y=1;
         }
         Serial.println("Turn 90 Degrees Right");
-        delay(1000);
+        delay(1000); // 1000ms turning time is approximately 90 degrees
       }
+      // when x becomes 0, the robot turns left at intersections four times
       else {
         left.write(100);
         right.write(90);
-        y++;
-        if (y>4) { 
+        y++; // y increments at each turn
+        if (y>4) { // this changes the turning direction and resets y
           x=1;
           y=1;
         }
         Serial.println("Turn 90 Degrees Left");     
-        delay(1000);                                     
+        delay(1000); // 1000ms turning time is approximately 90 degree
       }
       
   }
 
-    //if either light sensor is off the line (has onStat_ == 0)  
+    // this case cannot be reached unless some software glitch occurred. In that case, the robot would spin in circles
   else{
      left.write(100);
      right.write(100);
   }
 
    Serial.print("\n");
-   delay(2);
+   delay(2); // check the status of sensors every 2ms + time it takes this code in loop to run
    
 }
 ```
