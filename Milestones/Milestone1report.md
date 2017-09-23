@@ -32,6 +32,7 @@ Our robot appears slower in the second video due to the curvature of the line. W
 The next part of our milestone 1 involved turning and detecting intersections in a grid to produce a figure 8. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees right or left, where direction is determined by a coded figure 8 sequence. To move the robot in a figure-8 pattern, the code keeps track of the direction the robot should turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, and y = 1, the robot would turn left at an intersection and would keep turning left at intersections while incrementing y by 1, y++, until the number of consecutive left turns completed is 4, y>4. At that point, y is greater than 4, so the robot would change its turn direction (x = 0), would restart its tracking of consecutive turns (y = 1), and turn right four times, y++ per a turn until y>4. This produces a figure 8 pattern and repeats in an infinite loop.
 
 Here's a link for video of our robot's autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
+
 Below is a commented version of the code used:
 ```
 #include <Servo.h>
