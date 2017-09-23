@@ -14,15 +14,15 @@ Figure 1. Placement of line sensors on robot. (Front View)
 Figure 2. Placement of line sensors on robot. (Side View)
 
 Now we determine under what conditions should each servo move or stop. Here's the logic we used:
->If left sensor detects line (has a value greater than that indicating a dark surface) and right sensor detects line, robot is perpendicular to the line and needs to turn in one direction.
+>If left sensor detects line and right sensor detects line (i.e. the sensor detects a value greater than the threshold which indicates a dark surface, where a greater value is more dark), robot is perpendicular to the line and needs to turn in one direction.
 
->If left sensor is on the line and right sensor is not, robot drifted left and needs to turn slightly right.
+>If left sensor is on the line and right sensor is not, robot drifted right and needs to turn slightly left.
 
->If right sensor is on the line and left sensor is not, robot drifted right and needs to turn slightly left.
+>If right sensor is on the line and left sensor is not, robot drifted left and needs to turn slightly right.
 
 >If both sensors detect light (are not on the line), then the robot is centered on the line. 
 
->If robot is off the line, speed should increase to correct its position faster. 
+>If robot is off the line, one wheel stops while the other wheel corrects heading.
 
 Link to a short video of our robot following a straight line: [Video](https://youtu.be/OisnwRRMmFI)
 
@@ -31,14 +31,14 @@ Another video of our line-following robot, this time following a curve: [Video](
 Our robot appears slower in the second video due to the curvature of the line. We will not have to worry about following a curved line while traversing the maze, however, so our robot will be able to move faster.
 
 ## Part 2: Autonomous Figure-8 Movement
-The next part of our milestone 1 involved turning and detecting intersections in a grid. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees. To move the robot in a figure-8 pattern, we kept track of the direction the robot would turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, the robot would turn left at an intersection and would keep turning left at intersections until the number of consecutive left turns complete would surpass 4. At that point, y is greater than 4, so the robot would change its turn direction (x = !(x)) and restart its tracking of consecutive turns (y = 0).
+The next part of our milestone 1 involved turning and detecting intersections in a grid. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees right or left, where direction is determined by a coded sequence. To move the robot in a figure-8 pattern, we kept track of the direction the robot would turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, and y = 1, the robot would turn left at an intersection and would keep turning left at intersections until the number of consecutive left turns complete is 4. At that point, y is greater than 4, so the robot would change its turn direction (x = !(x)), restart its tracking of consecutive turns (y = 1), and turn right four times. This pattern repeats in an infinite loop.
 
 Here's a link for video of our robot's autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
 Below is a commented version of the code used:
 ```
 #include <Servo.h>
 int QRE1113_PinL = 0; // connect left light sensor to analog pin 0
-int QRE1113_PinR = 1; // connect left light sensor to analog pin 0
+int QRE1113_PinR = 1; // connect left light sensor to analog pin 1
 int onLine = 850;     // threshold value for sensor on line
 int onStatL;          // returns boolean for statment "left sensor is on the line"
 int onStatR;          // returns boolean for statment "right sensor is on the line"
@@ -47,13 +47,13 @@ int val = 100;        //normal motor speed
 int offVal = 140;     //motor speed when sensor is off line, faster to correct
 Servo left;           //set up left and right motor
 Servo right;
-int x=0;
-int y=1;
+int x=0;              // Determines turn direction in binary
+int y=1;              // Keeps track of number of turns
 
 void setup() {
   Serial.begin(9600);
-  left.attach(5);    //connect left servo to pin 11 and right servo to pin 10
-  right.attach(3);
+  left.attach(5);    // connect left servo to pin 5
+  right.attach(3);   // connect right servo to pin 3
 }
 
 void loop() {
