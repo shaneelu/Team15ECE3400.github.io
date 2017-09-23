@@ -3,7 +3,7 @@
 Our goal for milestone 1 was to have our robot autonomously follow a line in a figure-8 pattern. To implement this ability, we started off by deciding the arrangement of the line sensors to recognize a straight path along a piece of black tape on a white background. After achieving this functionality, we developed our code to enable the robot to traverse a grid of lines and follow a figure-8 pattern. 
 
 ## Part 1: Line Detection
-For our robot to detect and follow a simple, straight line, we first tested the QRE1113 line sensors to see what values corresponded with light and dark surfaces. With those values, we decided to place two line sensors in the center, spaced apart with a distance slightly greater than the width of the line. Using two sensors instead of four guaranteed that there would be sufficient analog pins. With this design the two values provide information on which way to adjust:
+For our robot to detect and follow a simple, straight line, we first tested the QRE1113 line sensors to see what values corresponded with light and dark surfaces. With those values, we decided to place two line sensors in the center, spaced apart with a distance slightly greater than the width of the line. Using two sensors instead of four guaranteed that there would be sufficient analog pins. With this design, the two values from the sensors provide information on which way to adjust heading.
 
 ![](./Milestone1/IMG_3845.JPG)
 
