@@ -14,15 +14,13 @@ Figure 1. Placement of line sensors on robot. (Front View)
 Figure 2. Placement of line sensors on robot. (Side View)
 
 Now we determine under what conditions should each servo move or stop. Here's the logic we used:
->If left sensor detects line and right sensor detects line (i.e. the sensor detects a value greater than the threshold which indicates a dark surface, where a greater value is more dark), robot is perpendicular to the line and needs to turn in one direction.
+>If both the left sensor and right sensor detect the black line (i.e. the sensor outputs a value greater than a pre-determined threshold which indicates a dark surface), robot is perpendicular to the line and needs to turn in one direction.
 
 >If left sensor is on the line and right sensor is not, robot drifted right and needs to turn slightly left.
 
 >If right sensor is on the line and left sensor is not, robot drifted left and needs to turn slightly right.
 
->If both sensors detect light (are not on the line), then the robot is centered on the line. 
-
->If robot is off the line, one wheel stops while the other wheel corrects heading.
+>If both sensors detect light (are not on the line), then the robot is centered on the line, provided that the robot has been following a line. If the robot is no longer on a line, it will think it's centered and will keep going straight.
 
 Link to a short video of our robot following a straight line: [Video](https://youtu.be/OisnwRRMmFI)
 
@@ -31,7 +29,7 @@ Another video of our line-following robot, this time following a curve: [Video](
 Our robot appears slower in the second video due to the curvature of the line. We will not have to worry about following a curved line while traversing the maze, however, so our robot will be able to move faster.
 
 ## Part 2: Autonomous Figure-8 Movement
-The next part of our milestone 1 involved turning and detecting intersections in a grid. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees right or left, where direction is determined by a coded sequence. To move the robot in a figure-8 pattern, we kept track of the direction the robot would turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, and y = 1, the robot would turn left at an intersection and would keep turning left at intersections until the number of consecutive left turns complete is 4. At that point, y is greater than 4, so the robot would change its turn direction (x = !(x)), restart its tracking of consecutive turns (y = 1), and turn right four times. This pattern repeats in an infinite loop.
+The next part of our milestone 1 involved turning and detecting intersections in a grid to produce a figure 8. An intersection was detected when both light sensors were on a line, indicating that the robot should turn 90 degrees right or left, where direction is determined by a coded figure 8 sequence. To move the robot in a figure-8 pattern, the code keeps track of the direction the robot should turn (x = 1 indicates right turn, x = 0 indicates left turn) and the number of consecutive turns in that direction (variable y). For example, if x = 0, and y = 1, the robot would turn left at an intersection and would keep turning left at intersections while incrementing y by 1, y++, until the number of consecutive left turns completed is 4, y>4. At that point, y is greater than 4, so the robot would change its turn direction (x = 0), would restart its tracking of consecutive turns (y = 1), and turn right four times, y++ per a turn until y>4. This produces a figure 8 pattern and repeats in an infinite loop.
 
 Here's a link for video of our robot's autonomous figure-8 movement:  [Video](https://youtu.be/ZuVscGUPQMY)
 Below is a commented version of the code used:
