@@ -14,4 +14,4 @@
 
 ## [September 22](./MM9-22.md)
 
-## [September 22](./MM9-24.md)
+## [September 24](./MM9-24.md)
