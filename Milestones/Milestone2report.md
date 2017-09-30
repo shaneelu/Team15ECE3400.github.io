@@ -228,7 +228,7 @@ We obtained three treasures, and tuned them to our target frequencies - 7 kHz, 1
 
 To confirm that each treasure is detected, we measured FFT peaks with the oscilloscope. The peaks for each treasure should look similar to the following diagrams:  
 
-[]!(./OpticsPhotos/Treasure7.jpg)
+[]!(./Milestone2/OpticsPhotos/Treasure7.jpg)
 > Figure 12. FFT for 7 kHz.  
 
 []!(./OpticsPhotos/Treasure12.jpg)
