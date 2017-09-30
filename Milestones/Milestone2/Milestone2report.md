@@ -2,7 +2,7 @@
 ### Preliminary Sensor Tests
 Our first goal for milestone 2 was to have our robot autonomously detect walls using the [Sharp GP2Y0A41SK0F](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf) short-range IR sensors. These IR short-range IR sensors were chosen given the small distance of the walls to the robot. We attached three of these IR sensors to a 3D printed mount attached to the robot in order to detect walls in front, to the left, and to the right to aid in navigation through the maze.
 
-We started off by connecting the IR sensor's GND, 5V, and analog signal output to the Arduino GND, +5V, and analog input respectively.
+We started off by connecting the IR sensor's GND, 5V, and analog signal output to the Arduino's GND, +5V, and analog input respectively.
 
 The IR sensor readout produced an output which must be translated to voltage, then into distance. Based on the [datasheet](https://www.pololu.com/file/0J713/GP2Y0A41SK0F.pdf), in order to calculate a voltage, the following operations must be performed on the sensor readout:
 
@@ -18,13 +18,13 @@ distance = 11*(1/volts)-.42; //datasheet graph shows Voltage = slope*(1/distance
 Next, we designed a custom distance sensor holder. Our group intends to place the distance sensors slightly ahead of the robot in order to allow the robot to begin the turn early.
 
 ![](./DistanceSensorPhotos/sensorsmountpic.png)
-> Figure 2. Schematic distance sensor holder
+> Figure 2. Schematic distance sensor holder.
 
 ![](./DistanceSensorPhotos/sensorplace.png)
 > Figure 3. Placement of distance sensors on the robot. Distance sensors are colored red.
 
 ![](./DistanceSensorPhotos/img_1832.jpg)
-> Figure 4. Sensor configuration on the actual robot
+> Figure 4. Sensor configuration on the actual robot.
 
 ### Reading from 3 IR Sensors in Sequence
 To continuously receive analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.  
@@ -41,10 +41,10 @@ void loop() {
   sensorValue = analogRead(AX);
 ```
 
->Figure 5. Sequentially reading from IR sensors in a repetitive loop.
+>Figure 5. Sequentially reading from IR sensors in a repetitive loop
 
 ![](./DistanceSensorPhotos/img_1812.jpg)
->Figure 6. Circuit for reading from 3 IR sensors.
+>Figure 6. Circuit for reading from 3 IR sensors
 
 After cursory testing, we found that the distance sensors tend to occasionally give erroneous values. As such, we designed an outlier detection code. It takes the average of the previous three values and, if the current value is an outlier, then it disregards the value. If, however, the distance sensors read three outlier values in a row, then the previous distance value array will be reset.
 
