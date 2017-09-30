@@ -239,7 +239,7 @@ To confirm that each treasure is detected, we measured FFT peaks with the oscill
 To test if our software itself works, we ran the Arduino serial monitor, and moved each treasure around the sensor. As the treasure was detected, the correct frequency was printed on the monitor. A video of the test can be found [here]( https://youtu.be/YcXYrebT4_M). 
 
 The entirety of our code: 
-
+```
 /*
 fft_adc_serial.pde
 guest openmusiclabs.com 7.7.14
