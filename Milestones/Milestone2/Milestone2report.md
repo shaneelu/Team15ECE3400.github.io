@@ -166,11 +166,11 @@ if (abs(test_dist) <= 15)
 ```
 >Figure 7. Left wall detected LED code. This segment replaces the if(abs(test_dist)<=15) block in Figure 6.
 
-You can see this in action [here](https://youtu.be/2miRjfxZEqo).
+You can see this in action in this [video](https://youtu.be/2miRjfxZEqo).
 
 
 ## Optics - Software to Read Treasures 
-To set up and test with the treasures, refer to the Optics Section of [Lab 2]( ….URL....). 
+To set up and test with the treasures, refer to the Optics Section of [Lab 2](https://cei-lab.github.io/ece3400/lab2.html). 
 
 To determine the frequency of the treasure, we used the fft_adc_serial example from the Open Music Library (as described in Lab 2). Since we know from testing, that the maximum bin number for 7 kHz is 47, for 12 kHz is 78 and for 17 kHz is 118, we extracted the maximum FFT amplitude and bin number by looping over the logged data from the library. Here’s a snippet of the code: 
 
@@ -216,7 +216,7 @@ These are our conditionals:
 
 ### Testing Treasure Reading
 
-We obtained three treasures, and tuned them to our target frequencies - 7 kHz, 12 kHz, 17 kHz - as described in [Lab 2]( ...URL…). Then, we wired each treasured to a power source at 3 V. The power source we used had 3 channels so we tested all three treasures at once, but you can also switch the treasures. The setup looked like this:
+We obtained three treasures, and tuned them to our target frequencies - 7 kHz, 12 kHz, 17 kHz - as described in [Lab 2](https://cei-lab.github.io/ece3400/lab2.html). Then, we wired each treasured to a power source at 3 V. The power source we used had 3 channels so we tested all three treasures at once, but you can also switch the treasures. The setup looked like this:
 
 
 ![](./OpticsPhotos/IMG_3841.JPG)
