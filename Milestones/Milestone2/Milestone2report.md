@@ -1,6 +1,6 @@
 ## Autonomous Wall Detection
 ### Preliminary Sensor Tests
-Our first goal for milestone 2 was to have our robot autonomously detect a wall, using short-range IR sensors that were appropriate given the size of the maze. We attached three to the front of the robot to detect walls in front, to the left, and to the right of the robot so it would know if moving forward or turning left/right is feasible. 
+Our first goal for milestone 2 was to have our robot autonomously detect a wall using [Sharp GP2Y0A41SK0F](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf) short-range IR sensors which are appropriate for the size of the maze. We attached three of these IR sensors to a 3D printed mount attached to the robot in order to detect walls in front, to the left, and to the right to aid in navigation through the maze.
 
 We started off by testing the output from one sensor, which connects to GND and 5V and outputs an analog signal up to 3.1 V. 
 
