@@ -4,7 +4,7 @@ Our first goal for milestone 2 was to have our robot autonomously detect walls u
 
 We started off by connecting the IR sensor's GND, 5V, and analog signal output to the Arduino's GND, +5V, and analog input respectively.
 
-The IR sensor readout produced an output which must be translated to voltage, then into distance. Based on the [datasheet](https://www.pololu.com/file/0J713/GP2Y0A41SK0F.pdf), in order to calculate a voltage, the following operations must be performed on the sensor readout:
+The IR sensor readout produced an output voltage which is translated to a digital value in range 0:1023 by the Arduino analog read. Our code then uses arithmetic to convert the digital value into a voltage value and finally into distance. Based on the [datasheet](https://www.pololu.com/file/0J713/GP2Y0A41SK0F.pdf), in order to calculate a voltage, the following operations must be performed on the sensor readout:
 
 ```
 volts = sensorValue*(5.0/1024.0);
@@ -27,7 +27,7 @@ Next, we designed a custom distance sensor holder. Our group intends to place th
 > Figure 4. Sensor configuration on the actual robot.
 
 ### Reading from 3 IR Sensors in Sequence
-To continuously receive analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.  
+To poll for the analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.
 
 ```
 void loop() {
@@ -166,7 +166,7 @@ if (abs(test_dist) <= 15)
 ```
 >Figure 7. Left wall detected LED code. This segment replaces the if(abs(test_dist)<=15) block in Figure 6.
 
-You can see this in action in this [video](https://youtu.be/2miRjfxZEqo).
+You can see this in action in this [video](https://youtu.be/2miRjfxZEqo). Pay attention to the LED. It flashes 3 times for left wall detected, 2 times for right wall detected, and 1 time for wall in front detected.
 
 
 ## Optics - Software to Read Treasures 
