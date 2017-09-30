@@ -4,7 +4,7 @@ Our first goal for milestone 2 was to have our robot autonomously detect walls u
 
 We started off by connecting the IR sensor's GND, 5V, and analog signal output to the Arduino GND, +5V, and analog input respectively.
 
-The IR sensor readout produced an output which must be translated to voltage, then into distance. Based on the [datasheet] (https://www.pololu.com/file/0J713/GP2Y0A41SK0F.pdf), in order to calculate a voltage, the following operations must be performed on the sensor readout:
+The IR sensor readout produced an output which must be translated to voltage, then into distance. Based on the [datasheet](https://www.pololu.com/file/0J713/GP2Y0A41SK0F.pdf), in order to calculate a voltage, the following operations must be performed on the sensor readout:
 
 ```
 volts = sensorValue*(5.0/1024.0);
