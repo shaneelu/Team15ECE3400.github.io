@@ -1,5 +1,5 @@
-## Autonomous Wall Detection
-### Preliminary Sensor Tests
+# Autonomous Wall Detection
+## Preliminary Sensor Tests
 Our first goal for milestone 2 was to have our robot autonomously detect walls using the [Sharp GP2Y0A41SK0F](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf) short-range IR sensors. These IR short-range IR sensors were chosen given the small distance of the walls to the robot. We attached three of these IR sensors to a 3D printed mount attached to the robot in order to detect walls in front, to the left, and to the right to aid in navigation through the maze.
 
 We started off by connecting the IR sensor's GND, 5V, and analog signal output to the Arduino's GND, +5V, and analog input respectively.
@@ -26,7 +26,7 @@ Next, we designed a custom distance sensor holder. Our group intends to place th
 ![](./DistanceSensorPhotos/img_1832.jpg)
 > Figure 4. Sensor configuration on the actual robot.
 
-### Reading from 3 IR Sensors in Sequence
+## Reading from 3 IR Sensors in Sequence
 To poll for the analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.
 
 ```
@@ -169,7 +169,7 @@ if (abs(test_dist) <= 15)
 You can see this in action in this [video](https://youtu.be/2miRjfxZEqo). Pay attention to the LED. It flashes 3 times for left wall detected, 2 times for right wall detected, and 1 time for wall in front detected.
 
 
-## Optics - Software to Read Treasures 
+# Optics - Software to Read Treasures 
 To set up and test with the treasures, refer to the Optics Section of [Lab 2](https://cei-lab.github.io/ece3400/lab2.html). 
 
 To determine the frequency of the treasure, we used the fft_adc_serial example from the Open Music Library (as described in Lab 2). Since we know from testing, that the maximum bin number for 7 kHz is 47, for 12 kHz is 78 and for 17 kHz is 118, we extracted the maximum FFT amplitude and bin number by looping over the logged data from the library. Here’s a snippet of the code: 
@@ -214,7 +214,7 @@ These are our conditionals:
 ```
 > Figure 9. Conditional statements to determine the correct treasure frequency as described above. 
 
-### Testing Treasure Reading
+## Testing Treasure Reading
 
 We obtained three treasures, and tuned them to our target frequencies - 7 kHz, 12 kHz, 17 kHz - as described in [Lab 2](https://cei-lab.github.io/ece3400/lab2.html). Then, we wired each treasured to a power source at 3 V. The power source we used had 3 channels so we tested all three treasures at once, but you can also switch the treasures. The setup looked like this:
 
