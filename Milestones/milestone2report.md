@@ -1,4 +1,4 @@
-Autonomous Wall Detection
+### Autonomous Wall Detection
 Our first goal for milestone 2 was to have our robot autonomously detect a wall, using short-range IR sensors that were appropriate given the size of the maze. We attached three to the front of the robot to detect walls in front, to the left, and to the right of the robot so it would know if moving forward or turning left/right is feasible. 
 
 We started off by testing the output from one sensor, which connects to GND and 5V and outputs an analog signal up to 3.1 V. 
@@ -11,15 +11,13 @@ distance = 11*(1/volts)-.42; //datasheet graph shows Voltage = slope*(1/distance
 
 ```
 
+
 > Figure 1. Graphical relationship between analog voltage and distance.
  
 Next, we designed a custom distance sensor holder. Our group intends to place the distance sensors slightly ahead of the robot in order to allow the robot to begin the turn early.
 
 
-
 > Figure 2. Schematic distance sensor holder
-
-
 
 > Figure 3. Placement of distance sensors on the robot. Distance sensors are colored red.
 
@@ -28,7 +26,7 @@ Next, we designed a custom distance sensor holder. Our group intends to place th
 Reading from 3 IR Sensors in Sequence
 To continuously receive analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.  
 
-`
+```
 void loop() {
   if(i == 0)
     AX = A0;
@@ -40,10 +38,10 @@ void loop() {
   sensorValue = analogRead(AX);
 ```
 
-Figure 5. Sequentially reading from IR sensors in a repetitive loop.
+>Figure 5. Sequentially reading from IR sensors in a repetitive loop.
 
 
-Figure 6. Circuit for reading from 3 IR sensors.
+>Figure 6. Circuit for reading from 3 IR sensors.
 
 After cursory testing, we found that the distance sensors tend to occasionally give erroneous values. As such, we designed an outlier detection code. It takes the average of the previous three values and, if the current value is an outlier, then it disregards the value. If, however, the distance sensors read three outlier values in a row, then the previous distance value array will be reset.
 
