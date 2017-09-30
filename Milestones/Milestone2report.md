@@ -11,18 +11,18 @@ distance = 11*(1/volts)-.42; //datasheet graph shows Voltage = slope*(1/distance
 
 ```
 
-[]!
+[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/graph.png)
 > Figure 1. Graphical relationship between analog voltage and distance.
  
 Next, we designed a custom distance sensor holder. Our group intends to place the distance sensors slightly ahead of the robot in order to allow the robot to begin the turn early.
 
-[]!
+[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorsmountpic.png)
 > Figure 2. Schematic distance sensor holder
 
-[]!
+[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorplace.png)
 > Figure 3. Placement of distance sensors on the robot. Distance sensors are colored red.
 
-[]!
+[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1832.jpg)
 > Figure 4. Sensor configuration on the actual robot
 
 Reading from 3 IR Sensors in Sequence
@@ -42,7 +42,7 @@ void loop() {
 
 >Figure 5. Sequentially reading from IR sensors in a repetitive loop.
 
-[]!
+[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1812.jpg)
 >Figure 6. Circuit for reading from 3 IR sensors.
 
 After cursory testing, we found that the distance sensors tend to occasionally give erroneous values. As such, we designed an outlier detection code. It takes the average of the previous three values and, if the current value is an outlier, then it disregards the value. If, however, the distance sensors read three outlier values in a row, then the previous distance value array will be reset.
@@ -186,7 +186,7 @@ To determine the frequency of the treasure, we used the fft_adc_serial example f
     }
 
 ```
-> Figure xx. Here, max_amp and max_bin’s are of type int.  For every 2 bins from a group of 150 (FFT_N/2), if the value at fft_log_out[i] is greater than the current max_amplitude, then we store that value in max_amp and store the index of the loop, i, in max_bin.  
+> Figure 8. Here, max_amp and max_bin’s are of type int.  For every 2 bins from a group of 150 (FFT_N/2), if the value at fft_log_out[i] is greater than the current max_amplitude, then we store that value in max_amp and store the index of the loop, i, in max_bin.  
 
 Then, we compare our calculated bin values to the actual maximum bin value using logical if-then statements. For each frequency, our range of detection was +/- 1. For example, for 7 kHz, we check if max_bin is greater than _or_ equal to 46 and if it is less than _or_ equal to 48. We do this to estimate our frequency, and to prevent the case in which the maximum bin number is not equal to 47. If the correct bin number is detected, the serial monitor will print the frequency. If no frequency is detected, the serial will print that no treasure is detected. 
 
@@ -214,31 +214,29 @@ These are our conditionals:
     }
 
 ```
-> Figure xx. Conditional statements to determine the correct treasure frequency as described above. 
+> Figure 9. Conditional statements to determine the correct treasure frequency as described above. 
 
 ### Testing Treasure Reading
 
 We obtained three treasures, and tuned them to our target frequencies - 7 kHz, 12 kHz, 17 kHz - as described in [Lab 2]( ...URL…). Then, we wired each treasured to a power source at 3 V. The power source we used had 3 channels so we tested all three treasures at once, but you can also switch the treasures. The setup looked like this:
 
 
-(./OpticsPhotos/IMG_3841.JPG)
-> Figure xx. Treasures tuned to 7 kHz, 12 kHz, 17 kHz, respectively. 
+[]!(./OpticsPhotos/IMG_3841.JPG)
+> Figure 10. Treasures tuned to 7 kHz, 12 kHz, 17 kHz, respectively. 
 
-(./OpticsPhotos/IMG_3842.JPG)
-> Figure xx. Treasures tuned to 7 kHz, 12 kHz, 17 kHz with sensor. 
-
-
+[]!(./OpticsPhotos/IMG_3842.JPG)
+> Figure 11. Treasures tuned to 7 kHz, 12 kHz, 17 kHz with sensor. 
 
 To confirm that each treasure is detected, we measured FFT peaks with the oscilloscope. The peaks for each treasure should look similar to the following diagrams:  
 
-(./OpticsPhotos/Treasure7.jpg)
-> Figure xx. FFT for 7 kHz.  
+[]!(./OpticsPhotos/Treasure7.jpg)
+> Figure 12. FFT for 7 kHz.  
 
-(./OpticsPhotos/Treasure12.jpg)
-> Figure xx. FFT for 12 kHz.  
+[]!(./OpticsPhotos/Treasure12.jpg)
+> Figure 13. FFT for 12 kHz.  
 
-(./OpticsPhotos/ Treasure17.jpg)
-> Figure xx. FFT for 15 kHz.  
+[]!(./OpticsPhotos/ Treasure17.jpg)
+> Figure 14. FFT for 15 kHz.  
 
 To test if our software itself works, we ran the Arduino serial monitor, and moved each treasure around the sensor. As the treasure was detected, the correct frequency was printed on the monitor. A video of the test can be found [here]( https://youtu.be/YcXYrebT4_M). 
 
