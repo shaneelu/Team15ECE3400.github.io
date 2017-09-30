@@ -1,5 +1,5 @@
-### Autonomous Wall Detection
-## Preliminary Sensor Tests
+## Autonomous Wall Detection
+### Preliminary Sensor Tests
 Our first goal for milestone 2 was to have our robot autonomously detect a wall, using short-range IR sensors that were appropriate given the size of the maze. We attached three to the front of the robot to detect walls in front, to the left, and to the right of the robot so it would know if moving forward or turning left/right is feasible. 
 
 We started off by testing the output from one sensor, which connects to GND and 5V and outputs an analog signal up to 3.1 V. 
@@ -26,7 +26,7 @@ Next, we designed a custom distance sensor holder. Our group intends to place th
 (Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1832.jpg)
 > Figure 4. Sensor configuration on the actual robot
 
-## Reading from 3 IR Sensors in Sequence
+### Reading from 3 IR Sensors in Sequence
 To continuously receive analog output from each of the three IR sensors without interference from the other two, we used the loop function to read from them one at a time.  
 
 ```
@@ -170,9 +170,7 @@ You can see this in action [here] (https://youtu.be/2miRjfxZEqo).
 
 
 
-### Optics - Software to Read Treasures 
-
-
+## Optics - Software to Read Treasures 
 To set up and test with the treasures, refer to the Optics Section of [Lab 2]( ….URL....). 
 
 To determine the frequency of the treasure, we used the fft_adc_serial example from the Open Music Library (as described in Lab 2). Since we know from testing, that the maximum bin number for 7 kHz is 47, for 12 kHz is 78 and for 17 kHz is 118, we extracted the maximum FFT amplitude and bin number by looping over the logged data from the library. Here’s a snippet of the code: 
