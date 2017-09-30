@@ -69,13 +69,36 @@ module DE0_NANO(
 
     wire [9:0]  PIXEL_COORD_X; // current x-coord from VGA driver
     wire [9:0]  PIXEL_COORD_Y; // current y-coord from VGA driver
-	 wire [1:0]  PositionX;
-	 wire [1:0]  PositionY;
+	 wire [1:0]  Movement;  // True if Robot Moved
+	 wire [1:0]  PositionX; // True if +X, False is -X
+	 wire [1:0]  PositionY; // True if +Y, False is -Y
 	 
     reg [7:0]  PIXEL_COLOR;   // input 8-bit pixel color for current coords
 	 
 	 reg [24:0] led_counter; // timer to keep track of when to toggle LED
 	 reg 			led_state;   // 1 is on, 0 is off
+	 reg 			movement_state = 1'd0;   // keeps track of whether the data is new
+	 
+	 // The Maze Array. We always start in the middle of array.
+	 // This array is big enough for worst case of robot starting in a corner.
+	 reg [48:0] Array [6:0] [6:0];
+	 reg [6:0] x;
+	 reg [6:0] y;
+	 reg [6:0] i;
+	 reg [6:0] j;
+	 
+	 initial begin
+	 
+			for (i=1; i<7; i = i + 1) begin
+				for (j=1; j<7; j = j + 1) begin
+					Array[i][j] = 1'd0; // Initialize everything to 0
+				end
+			end
+			Array[4][4] = 1'd1; // This is the starting point
+			
+	 end
+	 
+	 
 	 
     // Module outputs coordinates of next pixel to be written onto screen
     VGA_DRIVER driver(
@@ -91,12 +114,46 @@ module DE0_NANO(
 	 
 	 assign reset = ~KEY[0]; // reset when KEY0 is pressed
 	 
-	 assign PositionX = GPIO_0_D[31]; // Robot X Position
-	 assign PositionY = GPIO_0_D[33]; // Robot Y Position
+	 assign Movement = GPIO_0_D[29];  //True if Robot Moved
+	 assign PositionX = GPIO_0_D[31]; // True if +X, False is -X
+	 assign PositionY = GPIO_0_D[33]; // True if +Y, False is -Y
+	 
 	 
 always @(*) begin
 
-if (PositionX != 1'b0) begin
+if (Movement != 1'b0) begin
+
+	if (movement_state == 1'd1) begin
+	
+		movement_state = 1'd0; // Perform array update once
+		
+		// Update Array with new position
+		if (!PositionX) begin // Moved -X
+		x = x - 1'd1;
+		Array[x][y] = 1'd1;
+		end
+		if (PositionX) begin // Moved +X
+		x = x + 1'd1;
+		Array[x][y] = 1'd1;
+		end
+		if (!PositionY) begin // Moved -Y
+		y = y - 1'd1;
+		Array[x][y] = 1'd1;
+		end
+		if (PositionY) begin // Moved +Y
+		y = y + 1'd1;
+		Array[x][y] = 1'd1;
+		end
+		else begin
+		// Should never be here
+		end
+		
+		
+	end
+	
+	// a way to traverse this array and make boxes appear for elements which are true
+	
+	
 	 if (PIXEL_COORD_X > 10'd64 && PIXEL_COORD_X < 10'd120 && PIXEL_COORD_Y > 10'd64 && PIXEL_COORD_Y < 10'd120) begin
 			PIXEL_COLOR = 8'b111_111_11; // 
 	 end
