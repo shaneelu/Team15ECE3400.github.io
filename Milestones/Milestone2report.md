@@ -11,18 +11,18 @@ distance = 11*(1/volts)-.42; //datasheet graph shows Voltage = slope*(1/distance
 
 ```
 
-[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/graph.png)
+(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/graph.png)
 > Figure 1. Graphical relationship between analog voltage and distance.
  
 Next, we designed a custom distance sensor holder. Our group intends to place the distance sensors slightly ahead of the robot in order to allow the robot to begin the turn early.
 
-[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorsmountpic.png)
+(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorsmountpic.png)
 > Figure 2. Schematic distance sensor holder
 
-[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorplace.png)
+(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/sensorplace.png)
 > Figure 3. Placement of distance sensors on the robot. Distance sensors are colored red.
 
-[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1832.jpg)
+(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1832.jpg)
 > Figure 4. Sensor configuration on the actual robot
 
 Reading from 3 IR Sensors in Sequence
@@ -42,7 +42,7 @@ void loop() {
 
 >Figure 5. Sequentially reading from IR sensors in a repetitive loop.
 
-[]!(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1812.jpg)
+(Team15ECE3400.github.io/Milestones/Milestone2/DistanceSensorPhotos/img_1812.jpg)
 >Figure 6. Circuit for reading from 3 IR sensors.
 
 After cursory testing, we found that the distance sensors tend to occasionally give erroneous values. As such, we designed an outlier detection code. It takes the average of the previous three values and, if the current value is an outlier, then it disregards the value. If, however, the distance sensors read three outlier values in a row, then the previous distance value array will be reset.
