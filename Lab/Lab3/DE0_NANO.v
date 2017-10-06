@@ -69,32 +69,38 @@ module DE0_NANO(
 
     wire [9:0]  PIXEL_COORD_X; // current x-coord from VGA driver
     wire [9:0]  PIXEL_COORD_Y; // current y-coord from VGA driver
-	 wire [1:0]  Movement;  // True if Robot Moved
-	 wire [1:0]  PositionX; // True if +X, False is -X
-	 wire [1:0]  PositionY; // True if +Y, False is -Y
+	 
 	 
     reg [7:0]  PIXEL_COLOR;   // input 8-bit pixel color for current coords
 	 
 	 reg [24:0] led_counter; // timer to keep track of when to toggle LED
 	 reg 			led_state;   // 1 is on, 0 is off
-	 reg 			movement_state = 1'd0;   // keeps track of whether the data is new
+	 reg 			movement_state;   // keeps track of whether the data is new
+	 wire  	   MovementX;  // True if Robot Moved X
+	 wire		   MovementY;  // True if Robot Moved Y
+	 wire		   PositionX; // True if +X, False is -X
+	 wire	      PositionY; // True if +Y, False is -Y
 	 
 	 // The Maze Array. We always start in the middle of array.
 	 // This array is big enough for worst case of robot starting in a corner.
-	 reg [48:0] Array [6:0] [6:0];
-	 reg [6:0] x;
-	 reg [6:0] y;
-	 reg [6:0] i;
-	 reg [6:0] j;
+	 reg [2:0] Array [1:0] [1:0];
+	 reg [1:0] x;
+	 reg [1:0] y;
+	 reg [1:0] i;
+	 reg [1:0] j;
 	 
 	 initial begin
 	 
-			for (i=1; i<7; i = i + 1) begin
-				for (j=1; j<7; j = j + 1) begin
-					Array[i][j] = 1'd0; // Initialize everything to 0
+			for (i=1'd0; i<1'd1; i = i + 1'd1) begin
+				for (j=1'd0; j<1'd1; j = j + 1'd1) begin
+					Array[i][j] = 1'b0; // Initialize everything to 0
 				end
 			end
-			Array[4][4] = 1'd1; // This is the starting point
+			//Array[1'b0][1'b0] = 1'b0; // This is the starting point
+			
+			x = 1'd0;
+			y = 1'd0;
+			movement_state = 1'b1;
 			
 	 end
 	 
@@ -114,62 +120,70 @@ module DE0_NANO(
 	 
 	 assign reset = ~KEY[0]; // reset when KEY0 is pressed
 	 
-	 assign Movement = GPIO_0_D[29];  //True if Robot Moved
-	 assign PositionX = GPIO_0_D[31]; // True if +X, False is -X
+	 assign MovementX = GPIO_0_D[30];  //True if Robot Moved X
+	 assign MovementY = GPIO_0_D[31];  //True if Robot Moved Y
+	 assign PositionX = GPIO_0_D[32]; // True if +X, False is -X
 	 assign PositionY = GPIO_0_D[33]; // True if +Y, False is -Y
 	 
-	 
-always @(*) begin
+always @(posedge CLOCK_25) begin
 
-if (Movement != 1'b0) begin
-
-	if (movement_state == 1'd1) begin
+if (MovementX == 1'b1 && movement_state == 1'b1) begin
 	
-		movement_state = 1'd0; // Perform array update once
+		movement_state <= 1'b0; // Perform array update once
 		
 		// Update Array with new position
-		if (!PositionX) begin // Moved -X
-		x = x - 1'd1;
-		Array[x][y] = 1'd1;
+		//if (!PositionX) begin // Moved -X
+		//x <= x - 1'd1;
+		//Array[x][y] <= 1'b1;
+		//end
+		if (PositionX == 1'b1) begin // Moved +X
+		x <= x + 1'd1;
+		Array[x][y] <= 1'b1;
 		end
-		if (PositionX) begin // Moved +X
-		x = x + 1'd1;
-		Array[x][y] = 1'd1;
-		end
+end
+
+
+	/*
+if (movement_state == 1'b1) begin
+
+		movement_state <= 1'b0; // Perform array update once
+		
 		if (!PositionY) begin // Moved -Y
-		y = y - 1'd1;
-		Array[x][y] = 1'd1;
+		y <= y - 1'd1;
+		Array[x][y] <= 1'b1;
 		end
 		if (PositionY) begin // Moved +Y
-		y = y + 1'd1;
-		Array[x][y] = 1'd1;
+		y <= y + 1'd1;
+		Array[x][y] <= 1'b1;
 		end
-		else begin
-		// Should never be here
-		end
-		
-		
-	end
+end*/
 	
 	// a way to traverse this array and make boxes appear for elements which are true
+
+	// (0,0)
+	if (Array[1'd0][1'd0] && PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
+		PIXEL_COLOR = 8'b000_001_11; // 
+	end
+	// (0,1)
+	else if (Array[1'd0][1'd1] && PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
+		PIXEL_COLOR = 8'b000_001_11; // 
+	end
+	// (1,0)
+	else if (Array[1'd1][1'd0] && PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
+		PIXEL_COLOR = 8'b000_001_11; // 
+	end
+	// (1,1)
+	else if (Array[1'd1][1'd1] && PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
+		PIXEL_COLOR = 8'b000_001_11; // 
+	end
 	
+	else begin
+		PIXEL_COLOR = 8'b101_010_11;
+	end
 	
-	 if (PIXEL_COORD_X > 10'd64 && PIXEL_COORD_X < 10'd120 && PIXEL_COORD_Y > 10'd64 && PIXEL_COORD_Y < 10'd120) begin
-			PIXEL_COLOR = 8'b111_111_11; // 
-	 end
-	 
-	 else begin
-			PIXEL_COLOR = 8'b111_000_11; // Green
-	 end
 end
 
-		else begin
-		PIXEL_COLOR = 8'b111_000_11; // Green
-		end
 
-	 
-end
-	 
 	 
 	 assign LED[0] = led_state;
 	 
