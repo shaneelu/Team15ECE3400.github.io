@@ -78,14 +78,15 @@ module DE0_NANO(
 	 reg 			movement_state;   // keeps track of whether the data is new
 	 wire  	   MovementX;  // True if Robot Moved X
 	 wire		   MovementY;  // True if Robot Moved Y
-	 wire		   PositionX; // True if +X, False is -X
-	 wire	      PositionY; // True if +Y, False is -Y
+	 reg		   PositionX; // True if +X, False is -X
+	 reg	      PositionY; // True if +Y, False is -Y
+	 reg [1:0]			PositionXandY;
 	 
 	 // The Maze Array. We always start in the middle of array.
 	 // This array is big enough for worst case of robot starting in a corner.
-	 reg [2:0] Array [1:0] [1:0];
-	 reg [1:0] x;
-	 reg [1:0] y;
+	 reg [1:0] Array [1:0] [1:0];
+	 reg x;
+	 reg y;
 	 reg [1:0] i;
 	 reg [1:0] j;
 	 
@@ -120,13 +121,12 @@ module DE0_NANO(
 	 
 	 assign reset = ~KEY[0]; // reset when KEY0 is pressed
 	 
-	 assign MovementX = GPIO_0_D[30];  //True if Robot Moved X
-	 assign MovementY = GPIO_0_D[31];  //True if Robot Moved Y
-	 assign PositionX = GPIO_0_D[32]; // True if +X, False is -X
-	 assign PositionY = GPIO_0_D[33]; // True if +Y, False is -Y
+	 //assign MovementX = GPIO_0_D[30];  //True if Robot Moved X
+	 //assign MovementY = GPIO_0_D[32];  //True if Robot Moved Y
+	 
 	 
 always @(posedge CLOCK_25) begin
-
+/*
 if (MovementX == 1'b1 && movement_state == 1'b1) begin
 	
 		movement_state <= 1'b0; // Perform array update once
@@ -140,8 +140,37 @@ if (MovementX == 1'b1 && movement_state == 1'b1) begin
 		x <= x + 1'd1;
 		Array[x][y] <= 1'b1;
 		end
-end
-
+end */
+ PositionX = GPIO_0_D[31]; // True if +X, False is -X
+ PositionY = GPIO_0_D[33]; // True if +Y, False is -Y
+ PositionXandY = {PositionX, PositionY};
+	case(PositionXandY)
+		2'b00: begin
+		Array[x][y] = 1'b0;
+		x = x*1'b0;
+		y = y*1'b0;
+		Array[x][y] = 1'b1; end
+		2'b01: begin
+		Array[x][y] = 1'b0;
+		x = x*1'b0;
+		x = x+1'b1;
+		y=y*1'b0;
+		Array[x][y] = 1'b1; end
+		2'b10: begin
+		Array[x][y] = 1'b0;
+		x = x*1'b0;
+		y = y*1'b0;
+		y = y + 1'b1;
+		Array[x][y] = 1'b1; end
+		2'b11: begin
+		Array[x][y] = 1'b0;
+		x = x*1'b0;
+		x = x + 1'b1;
+		y = y*1'b0;
+		y = y + 1'b1;
+		Array[x][y] = 1'b1; end
+		default: Array[x][y] = 1'b1;
+	endcase
 
 	/*
 if (movement_state == 1'b1) begin
@@ -161,20 +190,33 @@ end*/
 	// a way to traverse this array and make boxes appear for elements which are true
 
 	// (0,0)
-	if (Array[1'd0][1'd0] && PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
-		PIXEL_COLOR = 8'b000_001_11; // 
+	if (PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
+		if(Array[1'd0][1'd0])begin
+		PIXEL_COLOR = 8'b000_001_11; end
+		else begin
+		PIXEL_COLOR = 8'b101_010_11; end
+		// 
 	end
 	// (0,1)
-	else if (Array[1'd0][1'd1] && PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
-		PIXEL_COLOR = 8'b000_001_11; // 
+	else if (PIXEL_COORD_X > (10'd60-10'd30) && PIXEL_COORD_X < (10'd60+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
+		if(Array[1'd0][1'd1])begin
+		PIXEL_COLOR = 8'b000_001_11; end
+		else begin
+		PIXEL_COLOR = 8'b101_010_11; end
 	end
 	// (1,0)
-	else if (Array[1'd1][1'd0] && PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
-		PIXEL_COLOR = 8'b000_001_11; // 
+	else if (PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60-10'd30) && PIXEL_COORD_Y < (10'd60+10'd30)) begin
+		if(Array[1'd1][1'd0])begin
+		PIXEL_COLOR = 8'b000_001_11; end
+		else begin
+		PIXEL_COLOR = 8'b101_010_11; end
 	end
 	// (1,1)
-	else if (Array[1'd1][1'd1] && PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
-		PIXEL_COLOR = 8'b000_001_11; // 
+	else if (PIXEL_COORD_X > (10'd60*2-10'd30) && PIXEL_COORD_X < (10'd60*2+10'd30) && PIXEL_COORD_Y > (10'd60*2-10'd30) && PIXEL_COORD_Y < (10'd60*2+10'd30)) begin
+		if(Array[1'd1][1'd1])begin
+		PIXEL_COLOR = 8'b000_001_11; end
+		else begin
+		PIXEL_COLOR = 8'b101_010_11; end 
 	end
 	
 	else begin
